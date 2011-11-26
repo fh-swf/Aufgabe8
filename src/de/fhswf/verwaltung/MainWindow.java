@@ -28,8 +28,8 @@ public class MainWindow extends JFrame
    {
       super("MainWindow");
 
-      final int width = 1024;
-      final int height = 700;
+//      final int width = 1024;
+//      final int height = 700;
       frame = this;
       JFrame.setDefaultLookAndFeelDecorated(true);
 
@@ -52,7 +52,7 @@ public class MainWindow extends JFrame
    public static void main(String[] args)
    {
       // Display the window in a thread safe way.
-	   MainWindow frame = new MainWindow();
+//	   MainWindow frame = new MainWindow();
 //      new JFrameShower(frame);
 //      try
 //      {  
