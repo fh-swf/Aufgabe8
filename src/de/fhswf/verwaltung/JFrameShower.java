@@ -9,9 +9,6 @@ import javax.swing.JFrame;
  */
 public class JFrameShower implements Runnable
 {
-   /** Versionsnummer. */
-   private static final long serialVersionUID = 1L;
-
    /** Das Hauptfenster der Anwendung. */
    private JFrame frame;
 

@@ -22,10 +22,10 @@ import javax.swing.JTable;
 
 
 /**
- * Hauptfenster der Notenverwaltung
+ * Hauptfenster der Fuhrparkverwaltung
  * 
  *
- * @author Michael Rockstein & Philipp Sch�fer
+ * @author Michael Rockstein & Philipp Schaefer
  * @version 1.0
  */
 public class MainWindow extends JFrame
@@ -35,13 +35,13 @@ public class MainWindow extends JFrame
 
    MainWindow frame;
    /**
-    * Bastelt die GUI f�rs Hauptfenster.
+    * Bastelt die GUI fuers Hauptfenster.
     */
    public MainWindow()
    {
       super("MainWindow");
 
-      final int width = 999;
+      final int width = 1024;
       final int height = 700;
       frame = this;
       JFrame.setDefaultLookAndFeelDecorated(true);
@@ -66,12 +66,12 @@ public class MainWindow extends JFrame
       menuBar = new JMenuBar();
       menuFile = new JMenu("Datei");
       menuFile.setMnemonic(KeyEvent.VK_D);
-      menuFile.getAccessibleContext().setAccessibleDescription("Datei-Men�");
+      menuFile.getAccessibleContext().setAccessibleDescription("Datei-Menue");
       menuBar.add(menuFile);
 
       menuHelp = new JMenu("Hilfe");
       menuHelp.setMnemonic(KeyEvent.VK_H);
-      menuHelp.getAccessibleContext().setAccessibleDescription("Hilfe-Men�");
+      menuHelp.getAccessibleContext().setAccessibleDescription("Hilfe-Menue");
       menuBar.add(menuHelp);
 
       actionNewNote = new JMenuItem("Neuen Fahrer...", KeyEvent.VK_N);
@@ -139,7 +139,7 @@ public class MainWindow extends JFrame
       tableScrollPaneDriver.setPreferredSize(new Dimension(320, 400));
       tableScrollPaneDriver.setBorder(BorderFactory
             .createCompoundBorder(BorderFactory.createCompoundBorder(
-                  BorderFactory.createTitledBorder("Fahrer�bersicht"), BorderFactory
+                  BorderFactory.createTitledBorder("Fahreruebersicht"), BorderFactory
                         .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneDriver
                   .getBorder()));
       
@@ -152,7 +152,7 @@ public class MainWindow extends JFrame
     tableScrollPaneCar.setPreferredSize(new Dimension(320, 400));
     tableScrollPaneCar.setBorder(BorderFactory
           .createCompoundBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Fahrzeug�bersicht"), BorderFactory
+                BorderFactory.createTitledBorder("Fahrzeuguebersicht"), BorderFactory
                       .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneCar
                 .getBorder()));
     
