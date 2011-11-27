@@ -1,11 +1,13 @@
 package de.fhswf.verwaltung;
 
+import java.util.Date;
+
 public class Fahrer {
     
     private Integer Fahrer_ID; 
     private String Name;
     private Integer Fuehrerscheinklasse;
-    private String FuehrerscheinSeit;
+    private Date FuehrerscheinSeit;
     
     public Fahrer()
     {
@@ -13,7 +15,7 @@ public class Fahrer {
 
     }
     
-    public Fahrer(Integer fahrer_id, String name, Integer fuehrerscheinklasse, String fuehrerscheinseit)
+    public Fahrer(Integer fahrer_id, String name, Integer fuehrerscheinklasse, Date fuehrerscheinseit)
     {
         setFahrer_ID(fahrer_id);
         setName(name);
@@ -45,11 +47,11 @@ public class Fahrer {
         Fuehrerscheinklasse = fuehrerscheinklasse;
     }
 
-    public String getFuehrerscheinSeit() {
+    public Date getFuehrerscheinSeit() {
         return FuehrerscheinSeit;
     }
 
-    public void setFuehrerscheinSeit(String fuehrerscheinSeit) {
+    public void setFuehrerscheinSeit(Date fuehrerscheinSeit) {
         FuehrerscheinSeit = fuehrerscheinSeit;
     }
     
