@@ -4,7 +4,7 @@ public class Fahrer {
     
     private Integer Fahrer_ID; 
     private String Name;
-    private String Fuehrerscheinklasse;
+    private Integer Fuehrerscheinklasse;
     private String FuehrerscheinSeit;
     
     public Fahrer()
@@ -13,7 +13,7 @@ public class Fahrer {
 
     }
     
-    public Fahrer(Integer fahrer_id, String name, String fuehrerscheinklasse, String fuehrerscheinseit)
+    public Fahrer(Integer fahrer_id, String name, Integer fuehrerscheinklasse, String fuehrerscheinseit)
     {
         setFahrer_ID(fahrer_id);
         setName(name);
@@ -37,11 +37,11 @@ public class Fahrer {
         Name = name;
     }
 
-    public String getFuehrerscheinklasse() {
+    public Integer getFuehrerscheinklasse() {
         return Fuehrerscheinklasse;
     }
 
-    public void setFuehrerscheinklasse(String fuehrerscheinklasse) {
+    public void setFuehrerscheinklasse(Integer fuehrerscheinklasse) {
         Fuehrerscheinklasse = fuehrerscheinklasse;
     }
 
