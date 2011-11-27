@@ -25,7 +25,7 @@ import javax.swing.JTable;
  * Hauptfenster der Notenverwaltung
  * 
  *
- * @author Michael Rockstein & Philipp Schäfer
+ * @author Michael Rockstein & Philipp Schï¿½fer
  * @version 1.0
  */
 public class MainWindow extends JFrame
@@ -35,13 +35,13 @@ public class MainWindow extends JFrame
 
    MainWindow frame;
    /**
-    * Bastelt die GUI fürs Hauptfenster.
+    * Bastelt die GUI fï¿½rs Hauptfenster.
     */
    public MainWindow()
    {
       super("MainWindow");
 
-      final int width = 1024;
+      final int width = 999;
       final int height = 700;
       frame = this;
       JFrame.setDefaultLookAndFeelDecorated(true);
@@ -66,12 +66,12 @@ public class MainWindow extends JFrame
       menuBar = new JMenuBar();
       menuFile = new JMenu("Datei");
       menuFile.setMnemonic(KeyEvent.VK_D);
-      menuFile.getAccessibleContext().setAccessibleDescription("Datei-Menü");
+      menuFile.getAccessibleContext().setAccessibleDescription("Datei-Menï¿½");
       menuBar.add(menuFile);
 
       menuHelp = new JMenu("Hilfe");
       menuHelp.setMnemonic(KeyEvent.VK_H);
-      menuHelp.getAccessibleContext().setAccessibleDescription("Hilfe-Menü");
+      menuHelp.getAccessibleContext().setAccessibleDescription("Hilfe-Menï¿½");
       menuBar.add(menuHelp);
 
       actionNewNote = new JMenuItem("Neuen Fahrer...", KeyEvent.VK_N);
@@ -82,7 +82,7 @@ public class MainWindow extends JFrame
 //         @Override
 //         public void actionPerformed(ActionEvent e)
 //         {
-//              new NoteDialog("Fach hinzufügen", frame, tableData).setRow(-1);
+//              new NoteDialog("Fach hinzufï¿½gen", frame, tableData).setRow(-1);
 //         }
 //      });
       menuFile.add(actionNewNote);
@@ -139,7 +139,7 @@ public class MainWindow extends JFrame
       tableScrollPaneDriver.setPreferredSize(new Dimension(320, 400));
       tableScrollPaneDriver.setBorder(BorderFactory
             .createCompoundBorder(BorderFactory.createCompoundBorder(
-                  BorderFactory.createTitledBorder("Fahrerübersicht"), BorderFactory
+                  BorderFactory.createTitledBorder("Fahrerï¿½bersicht"), BorderFactory
                         .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneDriver
                   .getBorder()));
       
@@ -152,7 +152,7 @@ public class MainWindow extends JFrame
     tableScrollPaneCar.setPreferredSize(new Dimension(320, 400));
     tableScrollPaneCar.setBorder(BorderFactory
           .createCompoundBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Fahrzeugübersicht"), BorderFactory
+                BorderFactory.createTitledBorder("Fahrzeugï¿½bersicht"), BorderFactory
                       .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneCar
                 .getBorder()));
     
