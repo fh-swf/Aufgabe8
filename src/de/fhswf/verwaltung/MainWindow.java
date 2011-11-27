@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -33,6 +34,8 @@ public class MainWindow extends JFrame
    /** Version. */
    private static final long serialVersionUID = 1L;
    
+   public static Vector<Fahrer> fahrerMap = new Vector<Fahrer>();
+   public static Vector<Fahrzeug> fahrzeugMap = new Vector<Fahrzeug>();
    public static  FahrerTableModel tableDataFahrer = new FahrerTableModel();
    public static  FahrzeugTableModel tableDataFahrzeug = new FahrzeugTableModel();
 
