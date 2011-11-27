@@ -130,91 +130,41 @@ public class MainWindow extends JFrame
       
       Container c = getContentPane();
 
-      JTable table = new JTable();
+      JTable tableDriver = new JTable();
 //      table.setModel(tableData);
 //      table.addMouseListener(new TableClickListener(table, frame, tableData));
-      JScrollPane tableScrollPane = new JScrollPane(table);
-      tableScrollPane
+      JScrollPane tableScrollPaneDriver = new JScrollPane(tableDriver);
+      tableScrollPaneDriver
             .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-      tableScrollPane.setPreferredSize(new Dimension(320, 400));
-      tableScrollPane.setBorder(BorderFactory
+      tableScrollPaneDriver.setPreferredSize(new Dimension(320, 400));
+      tableScrollPaneDriver.setBorder(BorderFactory
             .createCompoundBorder(BorderFactory.createCompoundBorder(
-                  BorderFactory.createTitledBorder("Notenübersicht"), BorderFactory
-                        .createEmptyBorder(10, 10, 10, 10)), tableScrollPane
+                  BorderFactory.createTitledBorder("Fahrerübersicht"), BorderFactory
+                        .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneDriver
                   .getBorder()));
       
-      
+      JTable tableCar = new JTable();
+//    table.setModel(tableData);
+//    table.addMouseListener(new TableClickListener(table, frame, tableData));
+    JScrollPane tableScrollPaneCar = new JScrollPane(tableCar);
+    tableScrollPaneCar
+          .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    tableScrollPaneCar.setPreferredSize(new Dimension(320, 400));
+    tableScrollPaneCar.setBorder(BorderFactory
+          .createCompoundBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Fahrzeugübersicht"), BorderFactory
+                      .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneCar
+                .getBorder()));
+    
+          
       JPanel hBox = new JPanel();
-      hBox.setLayout(new BoxLayout(hBox, BoxLayout.PAGE_AXIS));
+      hBox.setLayout(new BoxLayout(hBox, BoxLayout.LINE_AXIS));
       
-      hBox.add(tableScrollPane);
-            
-//      JPanel vBox = new JPanel();
-//      
-//      vBox = new JPanel();
-//      vBox.setLayout(new BoxLayout(vBox, BoxLayout.LINE_AXIS));
-//      JLabel bachelorLabel = new JLabel(" Bachelor Arbeit:  ");
-//      bachelorLabel.setPreferredSize(new Dimension(100, 30));
-//      vBox.add(bachelorLabel);
-//	  bachelor = new JComboBox(noteStrings);
-//	  bachelor.setEditable(false);
-//	  bachelor.setSelectedIndex(0);
-//	  bachelor.setPreferredSize(new Dimension(10, 10));
-//	  bachelor.setMaximumSize(new Dimension(50, 30));
-////	  bachelor.addActionListener(this);
-//      vBox.add(bachelor);
-//      
-//      hBox.add(vBox);
-//      
-//      vBox = new JPanel();
-//      vBox.setLayout(new BoxLayout(vBox, BoxLayout.LINE_AXIS));
-//      JLabel cololabel = new JLabel(" Kolloquium:          ");
-//      cololabel.setPreferredSize(new Dimension(100, 30));
-//      vBox.add(cololabel);
-//	  colo = new JComboBox(noteStrings);
-//	  colo.setEditable(false);
-//	  colo.setSelectedIndex(0);
-//	  colo.setPreferredSize(new Dimension(10, 10));
-//	  colo.setMaximumSize(new Dimension(50, 30));
-////	  colo.addActionListener(this);
-//      vBox.add(colo);
-//      
-//      hBox.add(vBox);
-//      
-//      JPanel hBox1 = new JPanel();
-//      hBox1.setLayout(new BoxLayout(hBox1, BoxLayout.PAGE_AXIS));
-//      
-//      JLabel qLabel = new JLabel(" Notendurchschnitt: ");
-//      qLabel.setPreferredSize(new Dimension(100, 10));
-//      hBox1.add(qLabel);
-//      
-//      noteText = new JPopupTextField();
-//      noteText.setPreferredSize(new Dimension(100, 30));
-//      noteText.setMaximumSize(new Dimension(100, 30));
-//      noteText.setEditable(false);
-//      hBox1.add(noteText);
-//      
-//      JLabel eLabel = new JLabel(" ECTS: ");
-//      eLabel.setPreferredSize(new Dimension(100, 10));
-//      hBox1.add(eLabel);
-//      
-//      ectsText = new JPopupTextField();
-//      ectsText.setPreferredSize(new Dimension(100, 30));
-//      ectsText.setMaximumSize(new Dimension(100, 30));
-//      ectsText.setEditable(false);
-//      hBox1.add(ectsText);
-//      
-//      hBox1.setSize(new Dimension(250, 100));
-//      hBox1.setMaximumSize(new Dimension(250, 250));
-//      
-//      vBox = new JPanel();
-//      vBox.setLayout(new BoxLayout(vBox, BoxLayout.LINE_AXIS));
-//      
-//      vBox.add(hBox);
-//      vBox.add(hBox1, BorderLayout.EAST);
-//      
+      hBox.add(tableScrollPaneDriver);
+      hBox.add(tableScrollPaneCar);
+      
       c.add(hBox);
-      
+            
       setSize(width, height);
       setVisible(true);
    }
