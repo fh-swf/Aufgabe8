@@ -2,19 +2,19 @@ package de.fhswf.verwaltung;
 
 import java.util.Date;
 
-public class Fahrzeuge {
+public class Fahrzeug {
     
     private Integer Fahrzeug_ID; 
     private String Kennzeichen;
     private Date Erstzulassung;
     
-    public Fahrzeuge()
+    public Fahrzeug()
     {
         
 
     }
     
-    public Fahrzeuge(Integer fahrzeug_id, String kennzeichen, Date erstzulassung)
+    public Fahrzeug(Integer fahrzeug_id, String kennzeichen, Date erstzulassung)
     {
         setFahrzeug_ID(fahrzeug_id);
         setKennzeichen(kennzeichen);
