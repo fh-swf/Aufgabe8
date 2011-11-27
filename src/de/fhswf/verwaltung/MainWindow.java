@@ -32,6 +32,9 @@ public class MainWindow extends JFrame
 {
    /** Version. */
    private static final long serialVersionUID = 1L;
+   
+   public static  FahrerTableModel tableDataFahrer = new FahrerTableModel();
+   public static  FahrzeugTableModel tableDataFahrzeug = new FahrzeugTableModel();
 
    MainWindow frame;
    /**
@@ -60,7 +63,7 @@ public class MainWindow extends JFrame
       JMenu menuHelp;
       JMenuItem actionExit;
       JMenuItem actionInfo;
-      JMenuItem actionNewNote;
+      JMenuItem actionNewFahrer;
       JMenuItem actionKwList;
       
       menuBar = new JMenuBar();
@@ -74,24 +77,31 @@ public class MainWindow extends JFrame
       menuHelp.getAccessibleContext().setAccessibleDescription("Hilfe-Menue");
       menuBar.add(menuHelp);
 
-      actionNewNote = new JMenuItem("Neuen Fahrer...", KeyEvent.VK_N);
-      actionNewNote.getAccessibleContext().setAccessibleDescription(
+      actionNewFahrer = new JMenuItem("Neuen Fahrer...", KeyEvent.VK_N);
+      actionNewFahrer.getAccessibleContext().setAccessibleDescription(
             "Neuen Fahrer anlegen.");
-//      actionNewNote.addActionListener(new ActionListener()
-//      {
-//         @Override
-//         public void actionPerformed(ActionEvent e)
-//         {
-//              new NoteDialog("Fach hinzuf�gen", frame, tableData).setRow(-1);
-//         }
-//      });
-      menuFile.add(actionNewNote);
+      actionNewFahrer.addActionListener(new ActionListener()
+      {
+         @Override
+         public void actionPerformed(ActionEvent e)
+         {
+              new DialogFahrer("Fahrer hinzufuegen", frame, tableDataFahrer).setRow(-1);
+         }
+      });
+      menuFile.add(actionNewFahrer);
 
       
       actionKwList = new JMenuItem("Neues Fahrzeug...", KeyEvent.VK_L);
       actionKwList.getAccessibleContext().setAccessibleDescription(
             "Neues Fahrzeug anlegen.");
-//      actionKwList.addActionListener(new Aktualisieren(frame, tableData));
+      actionKwList.addActionListener(new ActionListener()
+      {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+               new DialogFahrzeug("Fahrzeug hinzufuegen", frame, tableDataFahrzeug).setRow(-1);
+          }
+       });
       menuFile.add(actionKwList);
       
       actionExit = new JMenuItem("Beenden", KeyEvent.VK_E);
