@@ -41,7 +41,7 @@ public class MainWindow extends JFrame
    {
       super("MainWindow");
 
-      final int width = 1024;
+      final int width = 1000;
       final int height = 700;
       frame = this;
       JFrame.setDefaultLookAndFeelDecorated(true);
