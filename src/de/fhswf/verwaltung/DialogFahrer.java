@@ -155,8 +155,8 @@ public class DialogFahrer extends JDialog
 	   public void loadFahrer(Fahrer fahrer)
 	   {
 	      nameFahrer.setText(fahrer.getName());
-	      fKlasse.setSelectedIndex(fahrer.getFuehrerscheinklasse());
-	      fDatum.setSelectedDate(fahrer.getFuehrerscheinSeit());
+	      fKlasse.setSelectedIndex(fahrer.getFueKlasse());
+	      fDatum.setSelectedDate(fahrer.getFueSeit());
 	   }
 
 	public Integer getRow() {

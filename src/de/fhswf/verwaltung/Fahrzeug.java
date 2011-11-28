@@ -1,6 +1,6 @@
 package de.fhswf.verwaltung;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Fahrzeug {
     

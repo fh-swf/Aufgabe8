@@ -17,7 +17,7 @@ public class DataBaseHelper {
 	 * Struktur angelegt. Andernfalls wird die bestehende Struktur geladen.
 	 */
 	private void initDataBase() {
-		// Abfangen der mšglichen SQL-Exceptions
+		// Abfangen der moeglichen SQL-Exceptions
 		boolean DB_exists = DataBaseFile.isFile();
 		try {
 			// Starten der Datenbank
