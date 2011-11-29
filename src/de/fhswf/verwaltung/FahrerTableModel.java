@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 class FahrerTableModel extends AbstractTableModel {
 	   private static final long serialVersionUID = 1L;
-	   private String[] headers = {"Fach", "ECTS", "Wahlfach", "Note1", "Note2", "Note3", "Datum1", "Datum2", "Datum3" };
+	   private String[] headers = {"Fahrer", "ECTS", "Wahlfach", "Note1", "Note2", "Note3", "Datum1", "Datum2", "Datum3" };
 
 	   @SuppressWarnings({ "rawtypes" })
 	   Class[] columnClasses = { String.class, String.class, Boolean.class, String.class, String.class, String.class, Date.class, Date.class, Date.class };
