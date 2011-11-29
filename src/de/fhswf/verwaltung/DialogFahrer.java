@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -14,6 +15,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.standbysoft.component.date.swing.JDatePicker;
@@ -40,11 +43,15 @@ public class DialogFahrer extends JDialog
 	   private JButton saveButton;
 	   private JButton exitButton;
 	   
+	   private  FahrzeugTableModel tableDataFahrzeug = new FahrzeugTableModel();
+	   
 	   private String[] fKlasseStrings= { "A1", "A", "B", "C1", "C", "D1", "D", "BE", "C1E", "CE", "D1E", "DE", "M", "L", "T/S" };
 	   
 	   private int row = -1;
 	   
 	   private JDialog dialog;
+	   
+	   
 	   /**
 	    * Bastelt die GUI fürs Hauptfenster.
 	    */
@@ -58,7 +65,7 @@ public class DialogFahrer extends JDialog
 
 	      setTitle(title);
 	      final int width = 480;
-	      final int height = 280;
+	      final int height = 420;
 	      dialog = this;
 	      
 	      JFrame.setDefaultLookAndFeelDecorated(true);
@@ -196,6 +203,22 @@ public class DialogFahrer extends JDialog
 	      fDatum = new JDatePicker();
 	      horiBox.add(fDatum);
 	      vertBox.add(horiBox);
+	      
+	      JTable tableCar = new JTable();
+//	      tableCar.setModel(tableData);
+//	      tableCar.addMouseListener(new TableClickListener(tableCar, frame, tableDataFahrzeug));
+	      JScrollPane tableScrollPaneCar = new JScrollPane(tableCar);
+	      tableScrollPaneCar
+	            .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	      tableScrollPaneCar.setPreferredSize(new Dimension(400, 150));
+	      tableScrollPaneCar.setMaximumSize(new Dimension(440, 150));
+	      tableScrollPaneCar.setBorder(BorderFactory
+	            .createCompoundBorder(BorderFactory.createCompoundBorder(
+	                  BorderFactory.createTitledBorder("Fahrzeuguebersicht"), BorderFactory
+	                        .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneCar
+	                  .getBorder()));
+	      
+	      vertBox.add(tableScrollPaneCar);
 	       
 	      deleteButton = new JButton("Löschen");
 //	      deleteButton.addActionListener(new DelNoteAction(this, parent, model));
@@ -224,7 +247,7 @@ public class DialogFahrer extends JDialog
 
 	      vertBox.add(buttonBox, BorderLayout.SOUTH);
 	      
-	      // Noten und Buttons
+	      // Fahrer, Tabelle und Buttons
 	      c.add(vertBox, BorderLayout.NORTH);
 	      
 	      setSize(width, height);

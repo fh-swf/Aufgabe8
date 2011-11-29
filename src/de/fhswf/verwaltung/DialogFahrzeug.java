@@ -6,12 +6,15 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.standbysoft.component.date.swing.JDatePicker;
@@ -45,9 +48,9 @@ public class DialogFahrzeug extends JDialog
             throw new IllegalArgumentException("Title must not be null!");
 
         setTitle(title);
-        final int width = 480;
-        final int height = 280;
-        dialog = this;
+	    final int width = 480;
+	    final int height = 420;
+	    dialog = this;
 
         JFrame.setDefaultLookAndFeelDecorated(true);
 
@@ -76,6 +79,22 @@ public class DialogFahrzeug extends JDialog
         erstzulassung = new JDatePicker();
         horiBox.add(erstzulassung);
         vertBox.add(horiBox);
+        
+        JTable tableDriver = new JTable();
+//      tableDriver.setModel(tableDataFahrer);
+//      tableDriver.addMouseListener(new TableClickListener(tableDriver, frame, tableDataFahrer));
+        JScrollPane tableScrollPaneDriver = new JScrollPane(tableDriver);
+        tableScrollPaneDriver
+              .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	    tableScrollPaneDriver.setPreferredSize(new Dimension(400, 300));
+	    tableScrollPaneDriver.setMaximumSize(new Dimension(440, 300));
+        tableScrollPaneDriver.setBorder(BorderFactory
+              .createCompoundBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createTitledBorder("Fahreruebersicht"), BorderFactory
+                          .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneDriver
+                    .getBorder()));
+      
+        vertBox.add(tableScrollPaneDriver);
         
         deleteButton = new JButton("Loeschen");
 //        deleteButton.addActionListener(new DelNoteAction(this, parent, model));

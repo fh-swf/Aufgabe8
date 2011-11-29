@@ -6,14 +6,14 @@ public class Fahrer {
     
     private Integer Fahrer_ID; 
     private String Name;
-    private int fKlasse;
+    private String fKlasse;
     private Date fSeit;
     
     public Fahrer()
     {
     }
     
-    public Fahrer(Integer fahrer_id, String name, int fuehrerscheinklasse, Date fuehrerscheinseit)
+    public Fahrer(Integer fahrer_id, String name, String fuehrerscheinklasse, Date fuehrerscheinseit)
     {
         setFahrer_ID(fahrer_id);
         setName(name);
@@ -37,11 +37,11 @@ public class Fahrer {
         Name = name;
     }
 
-    public int getFueKlasse() {
+    public String getFueKlasse() {
         return fKlasse;
     }
 
-    public void setFueKlasse(int fuehrerscheinklasse) {
+    public void setFueKlasse(String fuehrerscheinklasse) {
         fKlasse = fuehrerscheinklasse;
     }
 

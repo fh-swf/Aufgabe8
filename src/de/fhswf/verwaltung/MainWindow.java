@@ -144,8 +144,8 @@ public class MainWindow extends JFrame
       Container c = getContentPane();
 
       JTable tableDriver = new JTable();
-//      table.setModel(tableData);
-//      table.addMouseListener(new TableClickListener(table, frame, tableData));
+//      tableDriver.setModel(tableDataFahrer);
+//      tableDriver.addMouseListener(new TableClickListener(tableDriver, frame, tableDataFahrer));
       JScrollPane tableScrollPaneDriver = new JScrollPane(tableDriver);
       tableScrollPaneDriver
             .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -157,8 +157,8 @@ public class MainWindow extends JFrame
                   .getBorder()));
       
       JTable tableCar = new JTable();
-//    table.setModel(tableData);
-//    table.addMouseListener(new TableClickListener(table, frame, tableData));
+//    tableCar.setModel(tableData);
+//    tableCar.addMouseListener(new TableClickListener(tableCar, frame, tableDataFahrzeug));
     JScrollPane tableScrollPaneCar = new JScrollPane(tableCar);
     tableScrollPaneCar
           .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
