@@ -36,9 +36,14 @@ public class MainWindow extends JFrame
    private static final long serialVersionUID = 1L;
    
    public static Vector<Fahrer> fahrerMap = new Vector<Fahrer>();
+   public static Vector<Fahrer> fahrerMapDel = new Vector<Fahrer>();
    public static Vector<Fahrzeug> fahrzeugMap = new Vector<Fahrzeug>();
+   public static Vector<Fahrzeug> fahrzeugMapDel = new Vector<Fahrzeug>();
+   public static Vector<DriverCar> driverCarMap = new Vector<DriverCar>();
+   public static Vector<DriverCar> driverCarMapDel = new Vector<DriverCar>();
    public TableModelFahrer tableDataFahrer = new TableModelFahrer();
    public TableModelFahrzeug tableDataFahrzeug = new TableModelFahrzeug();
+   public TableModelDriverCar tableDataDriverCar = new TableModelDriverCar();
 
    MainWindow frame;
    /**
@@ -67,8 +72,9 @@ public class MainWindow extends JFrame
       JMenu menuHelp;
       JMenuItem actionExit;
       JMenuItem actionInfo;
-      JMenuItem actionNewFahrer;
-      JMenuItem actionKwList;
+      JMenuItem actionNewDriver;
+      JMenuItem actionNewCar;
+      JMenuItem actionNewDriverCar;
       
       menuBar = new JMenuBar();
       menuFile = new JMenu("Datei");
@@ -81,10 +87,10 @@ public class MainWindow extends JFrame
       menuHelp.getAccessibleContext().setAccessibleDescription("Hilfe-Menue");
       menuBar.add(menuHelp);
 
-      actionNewFahrer = new JMenuItem("Neuen Fahrer...", KeyEvent.VK_N);
-      actionNewFahrer.getAccessibleContext().setAccessibleDescription(
+      actionNewDriver = new JMenuItem("Neuen Fahrer...", KeyEvent.VK_N);
+      actionNewDriver.getAccessibleContext().setAccessibleDescription(
             "Neuen Fahrer anlegen.");
-      actionNewFahrer.addActionListener(new ActionListener()
+      actionNewDriver.addActionListener(new ActionListener()
       {
          @Override
          public void actionPerformed(ActionEvent e)
@@ -92,13 +98,13 @@ public class MainWindow extends JFrame
               new DialogFahrer("Fahrer hinzufuegen", frame, tableDataFahrer).setRow(-1);
          }
       });
-      menuFile.add(actionNewFahrer);
+      menuFile.add(actionNewDriver);
 
       
-      actionKwList = new JMenuItem("Neues Fahrzeug...", KeyEvent.VK_L);
-      actionKwList.getAccessibleContext().setAccessibleDescription(
+      actionNewCar = new JMenuItem("Neues Fahrzeug...", KeyEvent.VK_L);
+      actionNewCar.getAccessibleContext().setAccessibleDescription(
             "Neues Fahrzeug anlegen.");
-      actionKwList.addActionListener(new ActionListener()
+      actionNewCar.addActionListener(new ActionListener()
       {
           @Override
           public void actionPerformed(ActionEvent e)
@@ -106,7 +112,21 @@ public class MainWindow extends JFrame
                new DialogFahrzeug("Fahrzeug hinzufuegen", frame, tableDataFahrzeug).setRow(-1);
           }
        });
-      menuFile.add(actionKwList);
+      menuFile.add(actionNewCar);
+      
+      
+      actionNewDriverCar = new JMenuItem("Neue Relation...", KeyEvent.VK_L);
+      actionNewDriverCar.getAccessibleContext().setAccessibleDescription(
+            "Neues Relation anlegen.");
+      actionNewDriverCar.addActionListener(new ActionListener()
+      {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+               new DialogDriverCar("Relation hinzufuegen", frame, tableDataDriverCar).setRow(-1);
+          }
+       });
+      menuFile.add(actionNewDriverCar);
       
       actionExit = new JMenuItem("Beenden", KeyEvent.VK_E);
       actionExit.getAccessibleContext().setAccessibleDescription(
@@ -228,7 +248,8 @@ public class MainWindow extends JFrame
    }
    public void delFahrer(int row)
    {
- 	  fahrerMap.remove(row);
+	   fahrerMapDel.add(fahrerMap.get(row));
+	   fahrerMap.remove(row);
    }
    
    public Fahrer getFahrer(int index)
@@ -240,6 +261,7 @@ public class MainWindow extends JFrame
    {
  	  return fahrerMap;
    }
+   
    
    public void addFahrzeug(Fahrzeug fahrzeug)
    {
@@ -253,7 +275,8 @@ public class MainWindow extends JFrame
    }
    public void delFahrzeug(int row)
    {
-	  fahrzeugMap.remove(row);
+	   fahrzeugMapDel.add(fahrzeugMap.get(row));
+	   fahrzeugMap.remove(row);
    }
    
    public Fahrzeug getFahrzeug(int index)
@@ -266,6 +289,28 @@ public class MainWindow extends JFrame
  	  return fahrzeugMap;
    }
    
+   
+   public void addDriverCar(DriverCar driverCar)
+   {
+	   driverCarMap.add(driverCar);
+   }
+   
+   public void delDriverCar(int row)
+   {
+	   driverCarMapDel.add(driverCarMap.get(row));
+	   driverCarMap.remove(row);
+   }
+   
+   public DriverCar getDriverCar(int index)
+   {
+      return driverCarMap.get(index);
+   }
+   
+   public Vector<DriverCar> getDriverCarMap()
+   {
+ 	  return driverCarMap;
+   }
+
    
    public void saveAllDatabases()
    {

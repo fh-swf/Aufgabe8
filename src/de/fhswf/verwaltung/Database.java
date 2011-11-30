@@ -43,6 +43,12 @@ public class Database {
 						"kennzeichen VARCHAR(30), " +
 						"erstzulassung DATE" +
 						")");
+				update(
+						"CREATE TABLE fahrer_fahrzeug ( " +
+						"id INTEGER IDENTITY, " +
+						"fahrer_id INTEGER, " +
+						"fahrzeug_id INTEGER" +
+						")");
 				
 			// Füllen der Tabelle mit Einträgen
 				@SuppressWarnings("deprecation")
