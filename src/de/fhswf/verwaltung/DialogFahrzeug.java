@@ -26,7 +26,7 @@ public class DialogFahrzeug extends JDialog
 
     protected JTextField      kennzeichen;
 
-    // protected JComboBox key3;
+    private  TableModelFahrer tableDataFahrer = new TableModelFahrer();
 
     protected JDatePicker     erstzulassung;
 
@@ -41,7 +41,7 @@ public class DialogFahrzeug extends JDialog
     /**
      * Bastelt die GUI fuers Hauptfenster.
      */
-    public DialogFahrzeug(String title, MainWindow parent, FahrzeugTableModel model)
+    public DialogFahrzeug(String title, MainWindow parent, TableModelFahrzeug model)
     {
         super();
         if (title == null)
@@ -81,7 +81,7 @@ public class DialogFahrzeug extends JDialog
         vertBox.add(horiBox);
         
         JTable tableDriver = new JTable();
-//      tableDriver.setModel(tableDataFahrer);
+        tableDriver.setModel(tableDataFahrer);
 //      tableDriver.addMouseListener(new TableClickListener(tableDriver, frame, tableDataFahrer));
         JScrollPane tableScrollPaneDriver = new JScrollPane(tableDriver);
         tableScrollPaneDriver
@@ -97,11 +97,11 @@ public class DialogFahrzeug extends JDialog
         vertBox.add(tableScrollPaneDriver);
         
         deleteButton = new JButton("Loeschen");
-//        deleteButton.addActionListener(new DelNoteAction(this, parent, model));
+        deleteButton.addActionListener(new ActionCar("del", this, parent, model));
         deleteButton.setEnabled(false);
 
         saveButton = new JButton("Speichern");
-//        saveButton.addActionListener(new AddNoteAction(this, parent, model));
+        saveButton.addActionListener(new ActionCar("add", this, parent, model));
         saveButton.setEnabled(true);
 
         exitButton = new JButton("Abbrechen");
@@ -148,7 +148,6 @@ public class DialogFahrzeug extends JDialog
     public void loadFahrzeug(Fahrzeug fahrzeug)
     {
         kennzeichen.setText(fahrzeug.getKennzeichen());
-//        key1.setSelectedIndex(fach.getNote1());
         erstzulassung.setSelectedDate(fahrzeug.getErstzulassung());
     }
 
@@ -157,7 +156,7 @@ public class DialogFahrzeug extends JDialog
     }
 
     public void setRow(int row) {
-        // System.out.println(row.toString());
+//         System.out.println(row.toString());
         this.row = row;
     }
 

@@ -13,12 +13,11 @@ public class Fahrer {
     {
     }
     
-    public Fahrer(Integer fahrer_id, String name, String fuehrerscheinklasse, Date fuehrerscheinseit)
+    public Fahrer(String name, String fuehrerscheinklasse, Date date)
     {
-        setFahrer_ID(fahrer_id);
         setName(name);
         setFueKlasse(fuehrerscheinklasse);
-        setFueSeit(fuehrerscheinseit);
+        setFueSeit(date);
     }
 
     public Integer getFahrer_ID() {

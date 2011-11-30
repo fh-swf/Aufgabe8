@@ -14,9 +14,8 @@ public class Fahrzeug {
 
     }
     
-    public Fahrzeug(Integer fahrzeug_id, String kennzeichen, Date erstzulassung)
+    public Fahrzeug(String kennzeichen, Date erstzulassung)
     {
-        setFahrzeug_ID(fahrzeug_id);
         setKennzeichen(kennzeichen);
         setErstzulassung(erstzulassung);
     }

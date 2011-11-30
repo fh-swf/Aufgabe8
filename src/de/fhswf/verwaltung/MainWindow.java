@@ -1,5 +1,6 @@
 package de.fhswf.verwaltung;
 
+
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -36,8 +37,8 @@ public class MainWindow extends JFrame
    
    public static Vector<Fahrer> fahrerMap = new Vector<Fahrer>();
    public static Vector<Fahrzeug> fahrzeugMap = new Vector<Fahrzeug>();
-   public static  FahrerTableModel tableDataFahrer = new FahrerTableModel();
-   public static  FahrzeugTableModel tableDataFahrzeug = new FahrzeugTableModel();
+   public static  TableModelFahrer tableDataFahrer = new TableModelFahrer();
+   public static  TableModelFahrzeug tableDataFahrzeug = new TableModelFahrzeug();
 
    MainWindow frame;
    /**
@@ -55,7 +56,7 @@ public class MainWindow extends JFrame
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.addWindowListener(new WindowAdapter(){
          public void windowClosing(WindowEvent we){
-//            frame.saveAllDatabases();
+            frame.saveAllDatabases();
             System.exit(0);
          }
        });
@@ -115,7 +116,7 @@ public class MainWindow extends JFrame
          @Override
          public void actionPerformed(ActionEvent e)
          {
-//            frame.saveAllDatabases();
+            frame.saveAllDatabases();
             System.exit(0);
          }
       });
@@ -144,8 +145,8 @@ public class MainWindow extends JFrame
       Container c = getContentPane();
 
       JTable tableDriver = new JTable();
-//      tableDriver.setModel(tableDataFahrer);
-//      tableDriver.addMouseListener(new TableClickListener(tableDriver, frame, tableDataFahrer));
+      tableDriver.setModel(tableDataFahrer);
+      tableDriver.addMouseListener(new TableClickListenerDriver(tableDriver, frame, tableDataFahrer));
       JScrollPane tableScrollPaneDriver = new JScrollPane(tableDriver);
       tableScrollPaneDriver
             .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -157,17 +158,17 @@ public class MainWindow extends JFrame
                   .getBorder()));
       
       JTable tableCar = new JTable();
-//    tableCar.setModel(tableData);
-//    tableCar.addMouseListener(new TableClickListener(tableCar, frame, tableDataFahrzeug));
-    JScrollPane tableScrollPaneCar = new JScrollPane(tableCar);
-    tableScrollPaneCar
-          .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    tableScrollPaneCar.setPreferredSize(new Dimension(320, 400));
-    tableScrollPaneCar.setBorder(BorderFactory
-          .createCompoundBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Fahrzeuguebersicht"), BorderFactory
-                      .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneCar
-                .getBorder()));
+      tableCar.setModel(tableDataFahrzeug);
+      tableCar.addMouseListener(new TableClickListenerCar(tableCar, frame, tableDataFahrzeug));
+      JScrollPane tableScrollPaneCar = new JScrollPane(tableCar);
+      tableScrollPaneCar
+            .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+      tableScrollPaneCar.setPreferredSize(new Dimension(320, 400));
+      tableScrollPaneCar.setBorder(BorderFactory
+            .createCompoundBorder(BorderFactory.createCompoundBorder(
+                  BorderFactory.createTitledBorder("Fahrzeuguebersicht"), BorderFactory
+                        .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneCar
+                  .getBorder()));
     
           
       JPanel hBox = new JPanel();
@@ -211,5 +212,87 @@ public class MainWindow extends JFrame
 //         // ignore
 //      }
    }
-
+   
+   public void addFahrer(Fahrer fahrer)
+   {
+      fahrerMap.add(fahrer);
+   }
+   
+   public void editFahrer(Fahrer fahrer, int row)
+   {
+ 	  fahrerMap.remove(row);
+ 	  fahrerMap.insertElementAt(fahrer, row);
+   }
+   public void delFahrer(int row)
+   {
+ 	  fahrerMap.remove(row);
+   }
+   
+   public Fahrer getFahrer(int index)
+   {
+      return fahrerMap.get(index);
+   }
+   
+   public Vector<Fahrer> getFahrerMap()
+   {
+ 	  return fahrerMap;
+   }
+   
+   public void addFahrzeug(Fahrzeug fahrzeug)
+   {
+	   fahrzeugMap.add(fahrzeug);
+   }
+   
+   public void editFahrzeug(Fahrzeug fahrzeug, int row)
+   {
+	  fahrzeugMap.remove(row);
+	  fahrzeugMap.insertElementAt(fahrzeug, row);
+   }
+   public void delFahrzeug(int row)
+   {
+	  fahrzeugMap.remove(row);
+   }
+   
+   public Fahrzeug getFahrzeug(int index)
+   {
+      return fahrzeugMap.get(index);
+   }
+   
+   public Vector<Fahrzeug> getFahrzeugMap()
+   {
+ 	  return fahrzeugMap;
+   }
+   
+   
+   public void saveAllDatabases()
+   {
+//      CsvWriter writer = new CsvWriter("noten.csv", ',', Charset.forName("UTF-8"));  
+      System.out.println("writing Driver...");
+      for(Fahrer fahrer : fahrerMap)
+      {
+         System.out.println(fahrer.toString());
+//         fach.toCSV(writer);
+      }
+//      writer.close();
+//
+//     CsvWriter writer = new CsvWriter("noten.csv", ',', Charset.forName("UTF-8"));  
+     System.out.println("writing Cars...");
+     for(Fahrzeug fahrzeug : fahrzeugMap)
+     {
+        System.out.println(fahrzeug.toString());
+//        fach.toCSV(writer);
+     }
+//     writer.close();
+//     
+	   //
+//     CsvWriter writer = new CsvWriter("noten.csv", ',', Charset.forName("UTF-8"));  
+     System.out.println("writing Relations...");
+//     for(Fach fach : fachMap)
+//     {
+//        System.out.println(fach.toString());
+//        fach.toCSV(writer);
+//     }
+//     writer.close();
+//     
+   }
 }

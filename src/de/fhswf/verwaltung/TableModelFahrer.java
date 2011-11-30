@@ -5,12 +5,12 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
-class FahrerTableModel extends AbstractTableModel {
+class TableModelFahrer extends AbstractTableModel {
 	   private static final long serialVersionUID = 1L;
-	   private String[] headers = {"Fahrer", "ECTS", "Wahlfach", "Note1", "Note2", "Note3", "Datum1", "Datum2", "Datum3" };
+	   private String[] headers = {"Fahrer", "Fuehrerscheinklassen", "Fuehrerscheindatum" };
 
 	   @SuppressWarnings({ "rawtypes" })
-	   Class[] columnClasses = { String.class, String.class, Boolean.class, String.class, String.class, String.class, Date.class, Date.class, Date.class };
+	   Class[] columnClasses = { String.class, String.class, Date.class };
 
 	   Vector<RowEntryDriver> data = new Vector<RowEntryDriver>();
 
@@ -63,13 +63,11 @@ class FahrerTableModel extends AbstractTableModel {
 	   }
 
 	   public void removeRowAt(int r) {
-		   r--;
 	       data.removeElementAt(r);
 	       fireTableRowsDeleted(r, r);
 	   }
 
 	   public void editRowAt(Fahrer fahrer, MainWindow frame, int r) {
-		   r--;
 		   data.removeElementAt(r);
 	       fireTableRowsDeleted(r, r);
 		   data.insertElementAt(new RowEntryDriver(fahrer.getName(), fahrer.getFueKlasse(), fahrer.getFueSeit() ), r);

@@ -43,7 +43,7 @@ public class DialogFahrer extends JDialog
 	   private JButton saveButton;
 	   private JButton exitButton;
 	   
-	   private  FahrzeugTableModel tableDataFahrzeug = new FahrzeugTableModel();
+	   private  TableModelFahrzeug tableDataFahrzeug = new TableModelFahrzeug();
 	   
 	   private String[] fKlasseStrings= { "A1", "A", "B", "C1", "C", "D1", "D", "BE", "C1E", "CE", "D1E", "DE", "M", "L", "T/S" };
 	   
@@ -55,7 +55,7 @@ public class DialogFahrer extends JDialog
 	   /**
 	    * Bastelt die GUI fürs Hauptfenster.
 	    */
-	   public DialogFahrer (String title, MainWindow parent, FahrerTableModel model)
+	   public DialogFahrer (String title, MainWindow parent, TableModelFahrer model)
 	   {
 	      super();
 	      if (title == null)
@@ -205,7 +205,7 @@ public class DialogFahrer extends JDialog
 	      vertBox.add(horiBox);
 	      
 	      JTable tableCar = new JTable();
-//	      tableCar.setModel(tableData);
+	      tableCar.setModel(tableDataFahrzeug);
 //	      tableCar.addMouseListener(new TableClickListener(tableCar, frame, tableDataFahrzeug));
 	      JScrollPane tableScrollPaneCar = new JScrollPane(tableCar);
 	      tableScrollPaneCar
@@ -221,11 +221,11 @@ public class DialogFahrer extends JDialog
 	      vertBox.add(tableScrollPaneCar);
 	       
 	      deleteButton = new JButton("Löschen");
-//	      deleteButton.addActionListener(new DelNoteAction(this, parent, model));
+	      deleteButton.addActionListener(new ActionDriver("del", this, parent, model));
 	      deleteButton.setEnabled(false);
 
 	      saveButton = new JButton("Speichern");
-//	      saveButton.addActionListener(new AddNoteAction(this, parent, model));
+	      saveButton.addActionListener(new ActionDriver("add", this, parent, model));
 	      saveButton.setEnabled(true);
 
 	      exitButton = new JButton("Abbrechen");
