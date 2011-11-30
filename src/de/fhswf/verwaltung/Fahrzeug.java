@@ -42,5 +42,10 @@ public class Fahrzeug {
 
     public void setErstzulassung(Date erstzulassung) {
         Erstzulassung = erstzulassung;
-    }    
+    }
+    
+    public String toString()
+    {
+       return "Kennzeichen: " + Kennzeichen + " Erstzulassung: " + Erstzulassung.toString();
+    }
 }

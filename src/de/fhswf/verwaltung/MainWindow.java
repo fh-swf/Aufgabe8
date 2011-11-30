@@ -37,8 +37,8 @@ public class MainWindow extends JFrame
    
    public static Vector<Fahrer> fahrerMap = new Vector<Fahrer>();
    public static Vector<Fahrzeug> fahrzeugMap = new Vector<Fahrzeug>();
-   public static  TableModelFahrer tableDataFahrer = new TableModelFahrer();
-   public static  TableModelFahrzeug tableDataFahrzeug = new TableModelFahrzeug();
+   public TableModelFahrer tableDataFahrer = new TableModelFahrer();
+   public TableModelFahrzeug tableDataFahrzeug = new TableModelFahrzeug();
 
    MainWindow frame;
    /**
@@ -150,7 +150,7 @@ public class MainWindow extends JFrame
       JScrollPane tableScrollPaneDriver = new JScrollPane(tableDriver);
       tableScrollPaneDriver
             .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-      tableScrollPaneDriver.setPreferredSize(new Dimension(320, 400));
+      tableScrollPaneDriver.setPreferredSize(new Dimension(400, 400));
       tableScrollPaneDriver.setBorder(BorderFactory
             .createCompoundBorder(BorderFactory.createCompoundBorder(
                   BorderFactory.createTitledBorder("Fahreruebersicht"), BorderFactory
@@ -163,7 +163,7 @@ public class MainWindow extends JFrame
       JScrollPane tableScrollPaneCar = new JScrollPane(tableCar);
       tableScrollPaneCar
             .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-      tableScrollPaneCar.setPreferredSize(new Dimension(320, 400));
+      tableScrollPaneCar.setPreferredSize(new Dimension(240, 400));
       tableScrollPaneCar.setBorder(BorderFactory
             .createCompoundBorder(BorderFactory.createCompoundBorder(
                   BorderFactory.createTitledBorder("Fahrzeuguebersicht"), BorderFactory
@@ -194,6 +194,9 @@ public class MainWindow extends JFrame
 //       Display the window in a thread safe way.
 	   MainWindow frame = new MainWindow();
        new JFrameShower(frame);
+       Database database = new Database();
+       database.load(frame);
+       database.shutdown();
 //      try
 //      {  
 //      }

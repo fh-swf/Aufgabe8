@@ -52,4 +52,9 @@ public class Fahrer {
         fSeit = fuehrerscheinSeit;
     }
     
+    public String toString()
+    {
+       return "Name: " + Name + " Fuehrerscheinklassen: " + fKlasse + " Fuehrerscheindatum: " + fSeit.toString();
+    }
+    
 }

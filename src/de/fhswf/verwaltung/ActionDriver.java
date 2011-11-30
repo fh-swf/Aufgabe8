@@ -5,6 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.sql.Date;
 
 import javax.swing.Action;
+import javax.swing.JCheckBox;
 
 public class ActionDriver implements Action
 {
@@ -13,6 +14,8 @@ public class ActionDriver implements Action
    MainWindow parent;
    TableModelFahrer model;
    String methode;
+   
+   private StringBuilder stringBuilder;
    
    public ActionDriver(String string, DialogFahrer dialogFahrer, MainWindow parent, TableModelFahrer model)
    {
@@ -64,16 +67,31 @@ public class ActionDriver implements Action
 
    }
 
-   @Override
+   @SuppressWarnings("deprecation")
+@Override
    public void actionPerformed(ActionEvent e)
    {
 	   if ( methode.contentEquals("add") )
 	   {
-		   @SuppressWarnings("deprecation")
+		   stringBuilder = new StringBuilder();
+		   for( JCheckBox checkBox : source.getCheckBoxMap() )
+		      {
+		         if (checkBox.isSelected())
+		         {
+		        	 if(stringBuilder.length() == 0)
+		        		 stringBuilder.append(checkBox.getLabel().trim());
+		        	 else
+		        	 {
+		        		 stringBuilder.append(", ");
+		        		 stringBuilder.append(checkBox.getLabel().trim());
+		        	 }
+		         }
+		      }
+		   
 		   Fahrer fahrer = new Fahrer(source.nameFahrer.getText(),
-						source.A.getName(),
-						new Date (source.fDatum.getSelectedDate().getYear(), source.fDatum.getSelectedDate().getMonth(), source.fDatum.getSelectedDate().getDate())
-						);
+										stringBuilder.toString(),
+										new Date (source.fDatum.getSelectedDate().getYear(), source.fDatum.getSelectedDate().getMonth(), source.fDatum.getSelectedDate().getDate())
+										);
 		   if (source.getRow() != -1)
 		   {
 			   model.editRowAt(fahrer, parent, source.getRow());	// Tabelle
