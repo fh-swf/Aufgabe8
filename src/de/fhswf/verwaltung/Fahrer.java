@@ -8,6 +8,7 @@ public class Fahrer {
     private String Name;
     private String fKlasse;
     private Date fSeit;
+    private Integer edited;
     
     public Fahrer()
     {
@@ -52,9 +53,17 @@ public class Fahrer {
         fSeit = fuehrerscheinSeit;
     }
     
-    public String toString()
+    public Integer getEdited() {
+		return edited;
+	}
+
+	public void setEdited(Integer edited) {
+		this.edited = edited;
+	}
+
+	public String toString()
     {
-       return "Name: " + Name + " Fuehrerscheinklassen: " + fKlasse + " Fuehrerscheindatum: " + fSeit.toString();
+       return "Name: " + Name + " Fuehrerscheinklassen: " + fKlasse + " Fuehrerscheindatum: " + fSeit.toString() + " Changed: " + edited.toString();
     }
     
 }

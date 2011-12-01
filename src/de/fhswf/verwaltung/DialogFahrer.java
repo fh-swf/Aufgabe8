@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -36,7 +37,7 @@ public class DialogFahrer extends JDialog
 	/** Version. */
 	   private static final long serialVersionUID = 1L;
 	   
-	   private static Vector<JCheckBox> checkBoxMap = new Vector<JCheckBox>();
+	   private Vector<JCheckBox> checkBoxMap = new Vector<JCheckBox>();
 
 	   protected JTextField nameFahrer;
 	   protected JCheckBox A1, A, B, C1, C, D1, D, BE, C1E, CE, D1E, DE, M, L, TS;
@@ -101,13 +102,13 @@ public class DialogFahrer extends JDialog
 	      A1 = new JCheckBox(fKlasseStrings[0] + "  ");
 	      A1.setMnemonic(KeyEvent.VK_A);
 	      A1.setSelected(false);
-	      getCheckBoxMap().add(A1);
+	      checkBoxMap.add(A1);
 	      horiBox.add(A1);
 	      
 	      A = new JCheckBox(fKlasseStrings[1] + "   ");
 	      A.setMnemonic(KeyEvent.VK_A);
 	      A.setSelected(false);
-	      getCheckBoxMap().add(A);
+	      checkBoxMap.add(A);
 	      horiBox.add(A);
 	      vertBox1.add(horiBox, BorderLayout.NORTH);
 	      
@@ -116,14 +117,14 @@ public class DialogFahrer extends JDialog
 	      B = new JCheckBox(fKlasseStrings[2] + "    ");
 	      B.setMnemonic(KeyEvent.VK_B);
 	      B.setSelected(false);
-	      getCheckBoxMap().add(B);
+	      checkBoxMap.add(B);
 	      horiBox.add(B);
 	      
 	      BE = new JCheckBox(fKlasseStrings[7] + "  ");
 	      BE.setMnemonic(KeyEvent.VK_B);
 	      BE.setSelected(false);
 	      horiBox.add(BE);
-	      getCheckBoxMap().add(BE);
+	      checkBoxMap.add(BE);
 	      vertBox1.add(horiBox, BorderLayout.WEST);
 	      
 	      horiBox = new JPanel();
@@ -131,25 +132,25 @@ public class DialogFahrer extends JDialog
 	      C1 = new JCheckBox(fKlasseStrings[3] + "  ");
 	      C1.setMnemonic(KeyEvent.VK_C);
 	      C1.setSelected(false);
-	      getCheckBoxMap().add(C1);
+	      checkBoxMap.add(C1);
 	      horiBox.add(C1);
 
 	      C1E = new JCheckBox(fKlasseStrings[8]);
 	      C1E.setMnemonic(KeyEvent.VK_C);
 	      C1E.setSelected(false);
-	      getCheckBoxMap().add(C1E);
+	      checkBoxMap.add(C1E);
 	      horiBox.add(C1E);
 
 	      C = new JCheckBox(fKlasseStrings[4] + "    ");
 	      C.setMnemonic(KeyEvent.VK_C);
 	      C.setSelected(false);
-	      getCheckBoxMap().add(C);
+	      checkBoxMap.add(C);
 	      horiBox.add(C);
 
 	      CE = new JCheckBox(fKlasseStrings[9] + "  ");
 	      CE.setMnemonic(KeyEvent.VK_C);
 	      CE.setSelected(false);
-	      getCheckBoxMap().add(CE);
+	      checkBoxMap.add(CE);
 	      horiBox.add(CE);
 	      vertBox1.add(horiBox, BorderLayout.SOUTH);
 	      
@@ -158,25 +159,25 @@ public class DialogFahrer extends JDialog
 	      D1 = new JCheckBox(fKlasseStrings[5] + "  ");
 	      D1.setMnemonic(KeyEvent.VK_D);
 	      D1.setSelected(false);
-	      getCheckBoxMap().add(D1);
+	      checkBoxMap.add(D1);
 	      horiBox.add(D1);
 
 	      D1E = new JCheckBox(fKlasseStrings[10]);
 	      D1E.setMnemonic(KeyEvent.VK_D);
 	      D1E.setSelected(false);
-	      getCheckBoxMap().add(D1E);
+	      checkBoxMap.add(D1E);
 	      horiBox.add(D1E);
 
 	      D = new JCheckBox(fKlasseStrings[6] + "    ");
 	      D.setMnemonic(KeyEvent.VK_D);
 	      D.setSelected(false);
-	      getCheckBoxMap().add(D);
+	      checkBoxMap.add(D);
 	      horiBox.add(D);
 
 	      DE = new JCheckBox(fKlasseStrings[11] + "  ");
 	      DE.setMnemonic(KeyEvent.VK_D);
 	      DE.setSelected(false);
-	      getCheckBoxMap().add(DE);
+	      checkBoxMap.add(DE);
 	      horiBox.add(DE);
 	      vertBox2.add(vertBox1, BorderLayout.NORTH);
 	      vertBox2.add(horiBox, BorderLayout.WEST);
@@ -186,19 +187,19 @@ public class DialogFahrer extends JDialog
 	      M = new JCheckBox(fKlasseStrings[12] + "    ");
 	      M.setMnemonic(KeyEvent.VK_M);
 	      M.setSelected(false);
-	      getCheckBoxMap().add(M);
+	      checkBoxMap.add(M);
 	      horiBox.add(M);
 
 	      L = new JCheckBox(fKlasseStrings[13] + "    ");
 	      L.setMnemonic(KeyEvent.VK_L);
 	      L.setSelected(false);
-	      getCheckBoxMap().add(L);
+	      checkBoxMap.add(L);
 	      horiBox.add(L);
 
 	      TS = new JCheckBox(fKlasseStrings[14]);
 	      TS.setMnemonic(KeyEvent.VK_T);
 	      TS.setSelected(false);
-	      getCheckBoxMap().add(TS);
+	      checkBoxMap.add(TS);
 	      horiBox.add(TS);
 	      vertBox2.add(horiBox, BorderLayout.SOUTH);
 	      
@@ -298,7 +299,7 @@ public class DialogFahrer extends JDialog
 	    	  if(fahrer.getFueKlasse().endsWith(checkBox.getLabel().trim()))
 	    		  checkBox.setSelected(true);
 	      }
-	      fDatum.setSelectedDate(fahrer.getFueSeit());
+	      fDatum.setSelectedDate(new Date(fahrer.getFueSeit().getYear()-1900, fahrer.getFueSeit().getMonth(), fahrer.getFueSeit().getDate()));
 	   }
 
 	public Integer getRow() {
@@ -312,10 +313,6 @@ public class DialogFahrer extends JDialog
 
 	public Vector<JCheckBox> getCheckBoxMap() {
 		return checkBoxMap;
-	}
-
-	public static void setCheckBoxMap(Vector<JCheckBox> checkBoxMap) {
-		DialogFahrer.checkBoxMap = checkBoxMap;
 	}
 
 	@Override

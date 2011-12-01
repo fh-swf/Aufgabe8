@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -145,10 +146,11 @@ public class DialogFahrzeug extends JDialog
         exitButton.setEnabled(state);
     }
 
-    public void loadFahrzeug(Fahrzeug fahrzeug)
+    @SuppressWarnings("deprecation")
+	public void loadFahrzeug(Fahrzeug fahrzeug)
     {
         kennzeichen.setText(fahrzeug.getKennzeichen());
-        erstzulassung.setSelectedDate(fahrzeug.getErstzulassung());
+        erstzulassung.setSelectedDate(new Date(fahrzeug.getErstzulassung().getYear()-1900, fahrzeug.getErstzulassung().getMonth(), fahrzeug.getErstzulassung().getDate()));
     }
 
     public Integer getRow() {

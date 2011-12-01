@@ -35,24 +35,25 @@ public class MainWindow extends JFrame
    /** Version. */
    private static final long serialVersionUID = 1L;
    
-   public static Vector<Fahrer> fahrerMap = new Vector<Fahrer>();
-   public static Vector<Fahrer> fahrerMapDel = new Vector<Fahrer>();
-   public static Vector<Fahrzeug> fahrzeugMap = new Vector<Fahrzeug>();
-   public static Vector<Fahrzeug> fahrzeugMapDel = new Vector<Fahrzeug>();
-   public static Vector<DriverCar> driverCarMap = new Vector<DriverCar>();
-   public static Vector<DriverCar> driverCarMapDel = new Vector<DriverCar>();
+   public Vector<Fahrer> fahrerMap = new Vector<Fahrer>();
+   public Vector<Fahrer> fahrerMapDel = new Vector<Fahrer>();
+   public Vector<Fahrzeug> fahrzeugMap = new Vector<Fahrzeug>();
+   public Vector<Fahrzeug> fahrzeugMapDel = new Vector<Fahrzeug>();
+   public Vector<DriverCar> driverCarMap = new Vector<DriverCar>();
+   public Vector<DriverCar> driverCarMapDel = new Vector<DriverCar>();
    public TableModelFahrer tableDataFahrer = new TableModelFahrer();
    public TableModelFahrzeug tableDataFahrzeug = new TableModelFahrzeug();
    public TableModelDriverCar tableDataDriverCar = new TableModelDriverCar();
 
    MainWindow frame;
+   Database database = new Database();
    /**
     * Bastelt die GUI fuers Hauptfenster.
     */
    public MainWindow()
    {
       super("MainWindow");
-
+      
       final int width = 1024;
       final int height = 700;
       frame = this;
@@ -61,7 +62,8 @@ public class MainWindow extends JFrame
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.addWindowListener(new WindowAdapter(){
          public void windowClosing(WindowEvent we){
-            frame.saveAllDatabases();
+            database.write(frame);
+            database.shutdown();
             System.exit(0);
          }
        });
@@ -75,6 +77,8 @@ public class MainWindow extends JFrame
       JMenuItem actionNewDriver;
       JMenuItem actionNewCar;
       JMenuItem actionNewDriverCar;
+      JMenuItem actionLoadDb;
+      JMenuItem actionWriteDb;
       
       menuBar = new JMenuBar();
       menuFile = new JMenu("Datei");
@@ -128,6 +132,44 @@ public class MainWindow extends JFrame
        });
       menuFile.add(actionNewDriverCar);
       
+      
+      actionLoadDb = new JMenuItem("Laden...", KeyEvent.VK_L);
+      actionLoadDb.getAccessibleContext().setAccessibleDescription(
+            "Aus Datenbank Laden.");
+      actionLoadDb.addActionListener(new ActionListener()
+      {
+    	  @Override
+          public void actionPerformed(ActionEvent e)
+          {
+    		   fahrerMap.clear();
+    		   fahrerMapDel.clear();
+    		   fahrzeugMap.clear();
+    		   fahrzeugMapDel.clear();
+    		   driverCarMap.clear();
+    		   driverCarMapDel.clear();
+    		   tableDataFahrer.clear();
+    		   tableDataFahrzeug.clear();
+    		   tableDataDriverCar.clear();
+         	database.load(frame);
+          }
+       });
+      menuFile.add(actionLoadDb);
+      
+      
+      actionWriteDb = new JMenuItem("Schreiben...", KeyEvent.VK_L);
+      actionWriteDb.getAccessibleContext().setAccessibleDescription(
+            "In Datenbank schreiben.");
+      actionWriteDb.addActionListener(new ActionListener()
+      {
+    	  @Override
+          public void actionPerformed(ActionEvent e)
+          {
+         	database.write(frame);
+          }
+       });
+      menuFile.add(actionWriteDb);
+      
+      
       actionExit = new JMenuItem("Beenden", KeyEvent.VK_E);
       actionExit.getAccessibleContext().setAccessibleDescription(
             "Beendet die Anwendung");
@@ -136,7 +178,8 @@ public class MainWindow extends JFrame
          @Override
          public void actionPerformed(ActionEvent e)
          {
-            frame.saveAllDatabases();
+        	database.write(frame);
+            database.shutdown();
             System.exit(0);
          }
       });
@@ -213,27 +256,10 @@ public class MainWindow extends JFrame
    {
 //       Display the window in a thread safe way.
 	   MainWindow frame = new MainWindow();
+	   Database database = new Database();
+	   database.load(frame);
        new JFrameShower(frame);
-       Database database = new Database();
-       database.load(frame);
-       database.shutdown();
-//      try
-//      {  
-//      }
-//      catch (FileNotFoundException e)
-//      {
-//         // TODO Auto-generated catch block
-//         e.printStackTrace();
-//      }
-//      catch (IOException e)
-//      {
-//         // TODO Auto-generated catch block
-//         e.printStackTrace();
-//      }
-//      catch (NumberFormatException nfe)
-//      {
-//         // ignore
-//      }
+
    }
    
    public void addFahrer(Fahrer fahrer)
@@ -311,36 +337,4 @@ public class MainWindow extends JFrame
  	  return driverCarMap;
    }
 
-   
-   public void saveAllDatabases()
-   {
-//      CsvWriter writer = new CsvWriter("noten.csv", ',', Charset.forName("UTF-8"));  
-      System.out.println("writing Driver...");
-      for(Fahrer fahrer : fahrerMap)
-      {
-         System.out.println(fahrer.toString());
-//         fach.toCSV(writer);
-      }
-//      writer.close();
-//
-//     CsvWriter writer = new CsvWriter("noten.csv", ',', Charset.forName("UTF-8"));  
-     System.out.println("writing Cars...");
-     for(Fahrzeug fahrzeug : fahrzeugMap)
-     {
-        System.out.println(fahrzeug.toString());
-//        fach.toCSV(writer);
-     }
-//     writer.close();
-//     
-	   //
-//     CsvWriter writer = new CsvWriter("noten.csv", ',', Charset.forName("UTF-8"));  
-     System.out.println("writing Relations...");
-//     for(Fach fach : fachMap)
-//     {
-//        System.out.println(fach.toString());
-//        fach.toCSV(writer);
-//     }
-//     writer.close();
-//     
-   }
 }

@@ -1,9 +1,9 @@
 package de.fhswf.verwaltung;
 
 import java.io.File;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 
 import de.fhswf.db.Testdb;
 
@@ -13,7 +13,6 @@ public class Database {
 	private static final File DataBaseFile = new File(DataBaseFileName+".script");
 	private Testdb dataBase;
 	private Integer id;
-	
 	/**
 	 * Initialisiert eine HSQL-Datenbank. Beim erstmaligem Starten der Datenbank wird eine neue 
 	 * Struktur angelegt. Andernfalls wird die bestehende Struktur geladen.
@@ -43,6 +42,7 @@ public class Database {
 						"kennzeichen VARCHAR(30), " +
 						"erstzulassung DATE" +
 						")");
+				
 				update(
 						"CREATE TABLE fahrer_fahrzeug ( " +
 						"id INTEGER IDENTITY, " +
@@ -53,6 +53,7 @@ public class Database {
 			// Füllen der Tabelle mit Einträgen
 				@SuppressWarnings("deprecation")
 				Date date1 = new Date(2000, 1, 15);
+				System.out.println(date1.toString());
 				@SuppressWarnings("deprecation")
 				Date date2 = new Date(2001, 3, 15);
 				@SuppressWarnings("deprecation")
@@ -119,13 +120,15 @@ public class Database {
 			
 			while (rs1.next()) {
 				
-				id = rs1.getInt("id");
+				Integer id = rs1.getInt("id");
 		        String name = rs1.getString("name");
 		        String fKlasse = rs1.getString("fklasse");
 		        Date fSeit = rs1.getDate("fseit");
 		        
-		        Fahrer fahrer = new Fahrer(name, fKlasse,fSeit);
+		        
+		        Fahrer fahrer = new Fahrer(name, fKlasse, fSeit);
 		        fahrer.setFahrer_ID(id);
+		        fahrer.setEdited(0);
 		        parent.addFahrer(fahrer);
 		        parent.tableDataFahrer.addRow(fahrer, parent);
 		        
@@ -136,7 +139,7 @@ public class Database {
 				stringBuilder.append(", ");
 				stringBuilder.append(fSeit.getDay());
 				stringBuilder.append(".");
-				stringBuilder.append(fSeit.getMonth());
+				stringBuilder.append(fSeit.getMonth()+1);
 				stringBuilder.append(".");
 				stringBuilder.append(fSeit.getYear());
 				System.out.println(stringBuilder.toString());
@@ -154,6 +157,7 @@ public class Database {
 		        
 		        Fahrzeug fahrzeug = new Fahrzeug(kennzeichen, erstzulassung);
 		        fahrzeug.setFahrzeug_ID(id);
+		        fahrzeug.setEdited(0);
 		        parent.addFahrzeug(fahrzeug);
 		        parent.tableDataFahrzeug.addRow(fahrzeug, parent);
 		        
@@ -162,7 +166,7 @@ public class Database {
 				stringBuilder.append(", ");
 				stringBuilder.append(erstzulassung.getDay());
 				stringBuilder.append(".");
-				stringBuilder.append(erstzulassung.getMonth());
+				stringBuilder.append(erstzulassung.getMonth()+1);
 				stringBuilder.append(".");
 				stringBuilder.append(erstzulassung.getYear());
 				System.out.println(stringBuilder.toString());
@@ -170,6 +174,86 @@ public class Database {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void write(MainWindow parent)
+	{
+	      System.out.println("delete Drivers...");
+	      for ( Fahrer fahrer : parent.fahrerMapDel )
+	      {
+	    	 System.out.println(fahrer.toString());
+	    	 if(fahrer.getFahrer_ID() != null)
+	        	 update("DELETE FROM fahrer WHERE id = " + fahrer.getFahrer_ID()
+	        			 			);
+	      }
+	      System.out.println(parent.fahrerMapDel.size() + " deleted Drivers...");
+	      
+				      System.out.println("writing Driver...");
+				      for ( Fahrer fahrer : parent.fahrerMap )
+				      {
+				    	 Date date = new Date(fahrer.getFueSeit().getYear(), fahrer.getFueSeit().getMonth(), fahrer.getFueSeit().getDate());
+				         System.out.println(fahrer.toString());
+				         if (fahrer.getEdited() == 1)
+				        	 update("UPDATE fahrer " +
+		        			 			"SET (name, fKlasse, fseit) = ('" +
+				        			 fahrer.getName() + "', '" +
+		        			 		 fahrer.getFueKlasse() + "', '" +
+				        			 date.toString() + "') " + 
+		        			 		 "WHERE id = " + fahrer.getFahrer_ID()
+				        			 			);
+				         
+				         if (fahrer.getEdited() == 3)
+				        	 update("INSERT INTO fahrer(name, fklasse, fseit) " +
+				        			 	"VALUES('" +
+				        			 fahrer.getName() + "', '" +
+		        			 		 fahrer.getFueKlasse() + "', '" +
+				        			 date.toString() + "')"
+				        			 			);
+				      }
+				      System.out.println(parent.fahrzeugMap.size() + " written Driver...");
+		
+				      
+				      System.out.println("delete Cars...");
+				      for ( Fahrzeug fahrzeug : parent.fahrzeugMapDel )
+				      {
+				    	 System.out.println(fahrzeug.toString());
+				    	 if(fahrzeug.getFahrzeug_ID() != null)
+				        	 update("DELETE FROM fahrzeug WHERE id = " + fahrzeug.getFahrzeug_ID()
+				        			 			);
+				      }
+				      System.out.println(parent.fahrzeugMapDel.size() + " deleted Cars...");
+				      
+				      System.out.println("writing Cars...");
+				      for ( Fahrzeug fahrzeug : parent.fahrzeugMap )
+				      {
+				    	  Date date = new Date(fahrzeug.getErstzulassung().getYear(), fahrzeug.getErstzulassung().getMonth(), fahrzeug.getErstzulassung().getDate());
+					         System.out.println(fahrzeug.toString());
+					         if (fahrzeug.getEdited() == 1)
+					        	 update("UPDATE fahrzeug " +
+			        			 			"SET (kennzeichen, erstzulassung) = ('" +
+					        			 fahrzeug.getKennzeichen() + "', '" +
+					        			 date.toString() + "') " + 
+			        			 		 "WHERE id = " + fahrzeug.getFahrzeug_ID()
+					        			 			);
+					         
+					         if (fahrzeug.getEdited() == 3)
+					        	 update("INSERT INTO fahrzeug(kennzeichen, erstzulassung) " +
+					        			 	"VALUES('" +
+					        			 fahrzeug.getKennzeichen() + "', '" +
+					        			 date.toString() + "')"
+					        			 			);
+				      }
+				      System.out.println(parent.fahrzeugMap.size() + " written Cars...");
+					   
+		//		     CsvWriter writer = new CsvWriter("noten.csv", ',', Charset.forName("UTF-8"));  
+				      System.out.println("writing Relations...");
+				      for ( DriverCar driverCar : parent.driverCarMap )
+				      {
+				         System.out.println(driverCar.toString());
+		//		        fach.toCSV(writer);
+				      }
+				      System.out.println("written Relations...");
 	}
 	
 	@SuppressWarnings("deprecation")

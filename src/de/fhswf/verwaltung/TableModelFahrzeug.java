@@ -1,6 +1,5 @@
 package de.fhswf.verwaltung;
 
-import java.sql.Date;
 import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
@@ -10,7 +9,7 @@ class TableModelFahrzeug extends AbstractTableModel {
 	   private String[] headers = {"Kennzeichen", "Erstzulassung" };
 
 	   @SuppressWarnings({ "rawtypes" })
-	   Class[] columnClasses = { String.class, Date.class };
+	   Class[] columnClasses = { String.class, String.class };
 
 	   Vector<RowEntryCar> data = new Vector<RowEntryCar>();
 

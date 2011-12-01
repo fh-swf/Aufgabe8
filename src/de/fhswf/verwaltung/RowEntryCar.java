@@ -6,12 +6,13 @@ import java.sql.Date;
 class RowEntryCar
 {
    String kennzeichen;
-   Date erstzulassung;
+   String erstzulassung;
 
-   public RowEntryCar(String kennzeichen, Date erstzulassung )
+   @SuppressWarnings("deprecation")
+public RowEntryCar(String kennzeichen, Date erstzulassung )
    {
       this.kennzeichen = kennzeichen;
-      this.erstzulassung = erstzulassung;
+      this.erstzulassung = String.valueOf(erstzulassung.getDate()) + "." + String.valueOf(erstzulassung.getMonth()+1) + "." + String.valueOf(erstzulassung.getYear());
    }
 
    public String getKennzeichen()
@@ -19,7 +20,7 @@ class RowEntryCar
       return kennzeichen;
    }
 
-   public Date getErstzulassung()
+   public String getErstzulassung()
    {
       return erstzulassung;
    }

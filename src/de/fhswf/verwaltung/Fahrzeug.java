@@ -7,6 +7,7 @@ public class Fahrzeug {
     private Integer Fahrzeug_ID; 
     private String Kennzeichen;
     private Date Erstzulassung;
+    private Integer edited;
     
     public Fahrzeug()
     {
@@ -44,8 +45,16 @@ public class Fahrzeug {
         Erstzulassung = erstzulassung;
     }
     
-    public String toString()
+    public Integer getEdited() {
+		return edited;
+	}
+
+	public void setEdited(Integer edited) {
+		this.edited = edited;
+	}
+
+	public String toString()
     {
-       return "Kennzeichen: " + Kennzeichen + " Erstzulassung: " + Erstzulassung.toString();
+       return "Kennzeichen: " + Kennzeichen + " Erstzulassung: " + Erstzulassung.toString() + " Changed: " + edited.toString();
     }
 }

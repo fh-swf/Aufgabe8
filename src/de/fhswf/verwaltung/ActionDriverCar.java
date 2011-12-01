@@ -68,13 +68,9 @@ public class ActionDriverCar implements Action
    {
 	   if ( methode.contentEquals("add") )
 	   {
-		   DriverCar driverCar = new DriverCar(source.driver.getSelectedIndex(),
-				   							   source.car.getSelectedIndex()
+		   DriverCar driverCar = new DriverCar(Integer.valueOf(String.valueOf(source.driver.getSelectedItem()).substring(0, 2).trim()),
+				   							   Integer.valueOf(String.valueOf(source.car.getSelectedItem()).substring(0, 2).trim())
 				   									   );
-		   if (parent.getDriverCarMap() == null)
-				   driverCar.setBez_ID(0);
-			   else
-				   driverCar.setBez_ID(parent.getDriverCarMap().size());
 			   model.addRow(driverCar, parent);          // Tabelle
 			   parent.addDriverCar(driverCar);                // fachMap
 
@@ -83,7 +79,7 @@ public class ActionDriverCar implements Action
 	   else if ( methode.contentEquals("del") )
 	   {
 		   model.removeRowAt(source.getRow());	// Tabelle
-		   parent.delFahrzeug(source.getRow());     // fachMap
+		   parent.delDriverCar(source.getRow());     // fachMap
 	   }
             source.dispose();
    }

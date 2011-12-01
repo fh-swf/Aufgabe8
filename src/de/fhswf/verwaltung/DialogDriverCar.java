@@ -27,9 +27,6 @@ public class DialogDriverCar extends JDialog
     @SuppressWarnings("rawtypes")
 	public JComboBox car;
     
-    public String[] driverStrings;
-    public String[] carStrings;
-    
     private  TableModelDriverCar tableDataDriverCar = new TableModelDriverCar();
 
     private JButton           deleteButton;
@@ -37,7 +34,6 @@ public class DialogDriverCar extends JDialog
     private JButton           exitButton;
 
     private int               row              = -1;
-
     private JDialog           dialog;
 
     /**
@@ -49,9 +45,6 @@ public class DialogDriverCar extends JDialog
         super();
         if (title == null)
             throw new IllegalArgumentException("Title must not be null!");
-
-//        noteStrings = parent.noteStrings;
-//        ectsStrings = parent.ectsStrings;
 
         setTitle(title);
 	    final int width = 480;
@@ -73,7 +66,11 @@ public class DialogDriverCar extends JDialog
         JLabel driverLabel = new JLabel(" Fahrer: ");
         driverLabel.setPreferredSize(new Dimension(100, 10));
         horiBox.add(driverLabel);
-  	    driver = new JComboBox(driverStrings);
+  	    driver = new JComboBox();
+  	    for ( Fahrer fahrer : parent.fahrerMap )
+  	      {
+  	    	driver.addItem(fahrer.getFahrer_ID() + "  : " + fahrer.getName());
+  	      }
   	    driver.setEditable(false);
   	    driver.setSelectedIndex(0);
   	    driver.addActionListener(this);
@@ -81,7 +78,11 @@ public class DialogDriverCar extends JDialog
   	    JLabel carLabel = new JLabel(" Fahrzeug: ");
   	    carLabel.setPreferredSize(new Dimension(100, 10));
   	    horiBox.add(carLabel);
-	    car = new JComboBox(carStrings);
+	    car = new JComboBox();
+	    for ( Fahrzeug fahrzeug : parent.fahrzeugMap )
+	      {
+	    	car.addItem(fahrzeug.getFahrzeug_ID() + "  : " + fahrzeug.getKennzeichen());
+	      }
 	    car.setEditable(false);
 	    car.setSelectedIndex(0);
 	    car.addActionListener(this);

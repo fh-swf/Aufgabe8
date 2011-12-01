@@ -15,8 +15,6 @@ public class ActionDriver implements Action
    TableModelFahrer model;
    String methode;
    
-   private StringBuilder stringBuilder;
-   
    public ActionDriver(String string, DialogFahrer dialogFahrer, MainWindow parent, TableModelFahrer model)
    {
 	  this.methode = string;
@@ -73,7 +71,8 @@ public class ActionDriver implements Action
    {
 	   if ( methode.contentEquals("add") )
 	   {
-		   stringBuilder = new StringBuilder();
+		   StringBuilder stringBuilder = new StringBuilder();
+		   
 		   for( JCheckBox checkBox : source.getCheckBoxMap() )
 		      {
 		         if (checkBox.isSelected())
@@ -90,19 +89,22 @@ public class ActionDriver implements Action
 		   
 		   Fahrer fahrer = new Fahrer(source.nameFahrer.getText(),
 										stringBuilder.toString(),
-										new Date (source.fDatum.getSelectedDate().getYear(), source.fDatum.getSelectedDate().getMonth(), source.fDatum.getSelectedDate().getDate())
+										new Date (source.fDatum.getSelectedDate().getYear()+1900, source.fDatum.getSelectedDate().getMonth(), source.fDatum.getSelectedDate().getDate())
 										);
+		   
+		   fahrer.setEdited(2);
+		   
 		   if (source.getRow() != -1)
 		   {
+			   if(parent.getFahrer(source.getRow()).getEdited() == 3)
+				   fahrer.setEdited(3);
+			   fahrer.setFahrer_ID(parent.getFahrer(source.getRow()).getFahrer_ID());
 			   model.editRowAt(fahrer, parent, source.getRow());	// Tabelle
 			   parent.editFahrer(fahrer, source.getRow());     // fachMap
 		   }
 		   else
 		   {
-			   if (parent.getFahrerMap() == null)
-				   fahrer.setFahrer_ID(0);
-			   else
-				   fahrer.setFahrer_ID(parent.getFahrerMap().size());
+			   fahrer.setEdited(3);
 			   model.addRow(fahrer, parent);          // Tabelle
 			   parent.addFahrer(fahrer);                // fachMap
 		   }
@@ -112,8 +114,8 @@ public class ActionDriver implements Action
 	   }
 	   else if ( methode.contentEquals("del") )
 	   {
-		   model.removeRowAt(source.getRow());	// Tabelle
-		   parent.delFahrer(source.getRow());     // fachMap
+			   model.removeRowAt(source.getRow());	// Tabelle
+			   parent.delFahrer(source.getRow());     // fachMap
 	   }
             source.dispose();
    }

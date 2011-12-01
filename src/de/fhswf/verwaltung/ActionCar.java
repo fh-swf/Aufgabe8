@@ -71,19 +71,21 @@ public class ActionCar implements Action
 	   {
 		   @SuppressWarnings("deprecation")
 		   Fahrzeug fahrzeug = new Fahrzeug(source.kennzeichen.getText(),
-				   							new Date (source.erstzulassung.getSelectedDate().getYear(), source.erstzulassung.getSelectedDate().getMonth(), source.erstzulassung.getSelectedDate().getDate())
+				   							new Date (source.erstzulassung.getSelectedDate().getYear()+1900, source.erstzulassung.getSelectedDate().getMonth(), source.erstzulassung.getSelectedDate().getDate())
 						);
+		   fahrzeug.setEdited(2);
+		   
 		   if (source.getRow() != -1)
 		   {
+			   if(parent.getFahrzeug(source.getRow()).getEdited() == 3)
+				   fahrzeug.setEdited(3);
+			   fahrzeug.setFahrzeug_ID(parent.getFahrzeug(source.getRow()).getFahrzeug_ID());
 			   model.editRowAt(fahrzeug, parent, source.getRow());	// Tabelle
 			   parent.editFahrzeug(fahrzeug, source.getRow());     // fachMap
 		   }
 		   else
 		   {
-			   if (parent.getFahrzeugMap() == null)
-				   fahrzeug.setFahrzeug_ID(0);
-			   else
-				   fahrzeug.setFahrzeug_ID(parent.getFahrzeugMap().size());
+			   fahrzeug.setEdited(3);
 			   model.addRow(fahrzeug, parent);          // Tabelle
 			   parent.addFahrzeug(fahrzeug);                // fachMap
 		   }
@@ -93,8 +95,8 @@ public class ActionCar implements Action
 	   }
 	   else if ( methode.contentEquals("del") )
 	   {
-		   model.removeRowAt(source.getRow());	// Tabelle
-		   parent.delFahrzeug(source.getRow());     // fachMap
+			   model.removeRowAt(source.getRow());	// Tabelle
+			   parent.delFahrzeug(source.getRow());     // fachMap
 	   }
             source.dispose();
    }
