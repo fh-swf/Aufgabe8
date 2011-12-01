@@ -71,6 +71,7 @@ public class ActionDriverCar implements Action
 		   DriverCar driverCar = new DriverCar(Integer.valueOf(String.valueOf(source.driver.getSelectedItem()).substring(0, 2).trim()),
 				   							   Integer.valueOf(String.valueOf(source.car.getSelectedItem()).substring(0, 2).trim())
 				   									   );
+		   driverCar.setNeu(true);
 			   model.addRow(driverCar, parent);          // Tabelle
 			   parent.addDriverCar(driverCar);                // fachMap
 

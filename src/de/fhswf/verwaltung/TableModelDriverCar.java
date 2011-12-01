@@ -55,7 +55,7 @@ class TableModelDriverCar extends AbstractTableModel {
 	   public void addRow(DriverCar driverCar, MainWindow frame) {
 	       int ID = getRowCount();
 	    
-	       data.add(ID, new RowEntryDriverCar(driverCar.getDriverId().toString() + " " + frame.getFahrer(driverCar.getDriverId()).getName(), driverCar.getCarId().toString() + " " + frame.getFahrzeug(driverCar.getCarId()).getKennzeichen()));
+	       data.add(ID, new RowEntryDriverCar(driverCar.getDriverId().toString(), driverCar.getCarId().toString()));
 	       fireTableRowsInserted(ID, ID); 
 	   }
 

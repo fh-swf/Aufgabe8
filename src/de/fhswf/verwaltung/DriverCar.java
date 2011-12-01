@@ -6,6 +6,7 @@ public class DriverCar {
     private Integer Bez_ID; 
     private Integer Driver_ID;
     private Integer Car_ID;
+    private Boolean neu;
     
     public DriverCar()
     {
@@ -17,6 +18,7 @@ public class DriverCar {
     {
         setDriverId(driverId);
         setCarId(carId);
+        setNeu(false);
     }
 
     public Integer getBez_ID() {
@@ -43,7 +45,15 @@ public class DriverCar {
         Car_ID = carId;
     }
     
-    public String toString()
+    public Boolean getNeu() {
+		return neu;
+	}
+
+	public void setNeu(Boolean neu) {
+		this.neu = neu;
+	}
+
+	public String toString()
     {
        return "Fahrer_ID: " + Driver_ID.toString() + " Fahrzeug_ID: " + Car_ID.toString();
     }

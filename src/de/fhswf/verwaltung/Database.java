@@ -286,7 +286,12 @@ public class Database {
 				      for ( DriverCar driverCar : parent.driverCarMap )
 				      {
 				         System.out.println(driverCar.toString());
-				         
+				         if (driverCar.getNeu())
+				        	 update("INSERT INTO fahrer_fahrzeug(fahrer_id, fahrzeug_id) " +
+				        			 	"VALUES('" +
+				        			 driverCar.getDriverId() + "', '" +
+				        			 driverCar.getCarId() + "')"
+				        			 			);
 				      }
 				      System.out.println(parent.driverCarMap.size() + "written Relations...");
 	}

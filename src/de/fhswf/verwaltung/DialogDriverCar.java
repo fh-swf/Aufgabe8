@@ -22,13 +22,9 @@ public class DialogDriverCar extends JDialog
     /** Version. */
     private static final long serialVersionUID = 1L;
 
-    @SuppressWarnings("rawtypes")
-	public JComboBox driver;
-    @SuppressWarnings("rawtypes")
-	public JComboBox car;
+    public JComboBox driver;
+    public JComboBox car;
     
-    private  TableModelDriverCar tableDataDriverCar = new TableModelDriverCar();
-
     private JButton           deleteButton;
     private JButton           saveButton;
     private JButton           exitButton;
@@ -39,7 +35,6 @@ public class DialogDriverCar extends JDialog
     /**
      * Bastelt die GUI fuers Hauptfenster.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
 	public DialogDriverCar(String title, MainWindow parent, TableModelDriverCar model)
     {
         super();
@@ -90,7 +85,7 @@ public class DialogDriverCar extends JDialog
         vertBox.add(horiBox);
 
         JTable tableDriverCar = new JTable();
-        tableDriverCar.setModel(tableDataDriverCar);
+        tableDriverCar.setModel(parent.tableDataDriverCar);
 //      tableDriver.addMouseListener(new TableClickListener(tableDriver, frame, tableDataFahrer));
         JScrollPane tableScrollPaneDriverCar = new JScrollPane(tableDriverCar);
         tableScrollPaneDriverCar
