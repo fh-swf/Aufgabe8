@@ -1,0 +1,11 @@
+UPDATE fahrer (feld1,feld2,feld3) VALUES(val1,val2,val3) where id = uebergebene id
+DELETE FROM fahrer where id = uebergebene id
+INSERT INTO fahrer (feld1,feld2,feld3) VALUES (val1,val2,val3) 
+
+UPDATE fahrzeug (feld1,feld2,feld3) VALUES(val1,val2,val3) where id = uebergebene id
+DELETE FROM fahezeug where id = uebergebene id
+INSERT INTO fahrzeug (feld1,feld2,feld3) VALUES (val1,val2,val3) 
+
+UPDATE fahrer_fahrzeug (feld1,feld2,feld3) VALUES(val1,val2,val3) where id = uebergebene id
+DELETE FROM fahrer_fahrzeug where id = uebergebene id
+INSERT INTO fahrer_fahrzeug (feld1,feld2,feld3) VALUES (val1,val2,val3) 

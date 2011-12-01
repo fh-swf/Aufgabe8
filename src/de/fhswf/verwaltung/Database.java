@@ -171,6 +171,31 @@ public class Database {
 				stringBuilder.append(erstzulassung.getYear());
 				System.out.println(stringBuilder.toString());
 			}
+			
+			System.out.println("--- TABELLE 3 ---");
+			// Ausgeben aller Personen über ein ResultSet
+			ResultSet rs3 = dataBase.query("SELECT * FROM fahrer_fahrzeug");
+			
+			while (rs3.next()) {
+				
+				id = rs3.getInt("id");
+		        Integer fahrerId = rs3.getInt("fahrer_id");
+		        Integer fahrzeugId = rs3.getInt("fahrzeug_id");
+		        
+		        DriverCar driverCar = new DriverCar(fahrerId, fahrzeugId);
+		        driverCar.setBez_ID(id);
+		        parent.addDriverCar(driverCar);
+		        parent.tableDataDriverCar.addRow(driverCar, parent);
+		        
+		        StringBuilder stringBuilder = new StringBuilder();
+				stringBuilder.append(id);
+				stringBuilder.append(", ");
+				stringBuilder.append(fahrerId);
+				stringBuilder.append(" : ");
+				stringBuilder.append(fahrzeugId);
+				
+				System.out.println(stringBuilder.toString());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -245,15 +270,25 @@ public class Database {
 					        			 			);
 				      }
 				      System.out.println(parent.fahrzeugMap.size() + " written Cars...");
-					   
-		//		     CsvWriter writer = new CsvWriter("noten.csv", ',', Charset.forName("UTF-8"));  
+				      
+				      System.out.println("delete Relations...");
+				      for ( DriverCar driverCar : parent.driverCarMapDel )
+				      {
+				    	 System.out.println(driverCar.toString());
+				    	 if(driverCar.getBez_ID() != null)
+				        	 update("DELETE FROM fahrer_fahrzeug WHERE id = " + driverCar.getBez_ID()
+				        			 			);
+				      }
+				      System.out.println(parent.driverCarMapDel.size() + " deleted Cars...");
+				       
+  
 				      System.out.println("writing Relations...");
 				      for ( DriverCar driverCar : parent.driverCarMap )
 				      {
 				         System.out.println(driverCar.toString());
-		//		        fach.toCSV(writer);
+				         
 				      }
-				      System.out.println("written Relations...");
+				      System.out.println(parent.driverCarMap.size() + "written Relations...");
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -268,6 +303,10 @@ public class Database {
 			System.out.println("--- TABELLE 2 ---");
 			// Ausgeben aller Personen im Terminal
 			dataBase.dumpQuery("SELECT * FROM fahrzeug");
+			
+			System.out.println("--- TABELLE 3 ---");
+			// Ausgeben aller Personen im Terminal
+			dataBase.dumpQuery("SELECT * FROM fahrer_fahrzeug");
 			
 			System.out.println("--- TESTFALL 2 ---");
 			System.out.println("--- TABELLE 1 ---");
