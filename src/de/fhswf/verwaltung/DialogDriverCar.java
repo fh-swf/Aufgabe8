@@ -22,8 +22,10 @@ public class DialogDriverCar extends JDialog
     /** Version. */
     private static final long serialVersionUID = 1L;
 
-    public JComboBox driver;
-    public JComboBox car;
+    @SuppressWarnings("rawtypes")
+	public JComboBox driver;
+    @SuppressWarnings("rawtypes")
+	public JComboBox car;
     
     private JButton           deleteButton;
     private JButton           saveButton;
@@ -35,6 +37,7 @@ public class DialogDriverCar extends JDialog
     /**
      * Bastelt die GUI fuers Hauptfenster.
      */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public DialogDriverCar(String title, MainWindow parent, TableModelDriverCar model)
     {
         super();
