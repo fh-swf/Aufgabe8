@@ -44,6 +44,7 @@ public class DialogFahrer extends JDialog
 	   protected JDatePicker fDatum;
 	   
 	   private JButton deleteButton;
+	   private JButton relationButton;
 	   private JButton saveButton;
 	   private JButton exitButton;
 	   
@@ -68,7 +69,7 @@ public class DialogFahrer extends JDialog
 //	      fKlasseStrings = parent.noteStrings;
 
 	      setTitle(title);
-	      final int width = 480;
+	      final int width = 540;
 	      final int height = 420;
 	      dialog = this;
 	      
@@ -247,6 +248,10 @@ public class DialogFahrer extends JDialog
 	      saveButton.addActionListener(new ActionDriver("add", this, parent, model));
 	      saveButton.setEnabled(true);
 
+	      relationButton = new JButton("Speichern und Fahrzeug hinzufuegen");
+	      relationButton.addActionListener(new ActionDriver("rel", this, parent, model));
+	      relationButton.setEnabled(true);
+
 	      exitButton = new JButton("Abbrechen");
 	      exitButton.addActionListener(new ActionListener()
 	      {
@@ -262,6 +267,7 @@ public class DialogFahrer extends JDialog
 	      buttonBox.setLayout(new BoxLayout(buttonBox, BoxLayout.LINE_AXIS));
 	      buttonBox.add(deleteButton);
 	      buttonBox.add(saveButton);
+	      buttonBox.add(relationButton);
 	      buttonBox.add(exitButton);
 
 	      vertBox.add(buttonBox, BorderLayout.SOUTH);
@@ -276,6 +282,11 @@ public class DialogFahrer extends JDialog
 	   public void setDeleteEnabled(boolean state)
 	   {
 	      deleteButton.setEnabled(state);
+	   }
+	   
+	   public void setRelationEnabled(boolean state)
+	   {
+	      relationButton.setEnabled(state);
 	   }
 	   
 	   public void setSaveEnabled(boolean state)

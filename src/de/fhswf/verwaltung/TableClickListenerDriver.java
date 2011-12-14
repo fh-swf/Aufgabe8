@@ -39,6 +39,7 @@ public class TableClickListenerDriver implements MouseListener
          dialog.loadFahrer(parent.getFahrer(row));
          dialog.setDeleteEnabled(true);
          dialog.setSaveEnabled(true);
+         dialog.setRelationEnabled(false);
          dialog.setExitEnabled(true);
          System.out.println(row);
          System.out.println(dialog.getRow());

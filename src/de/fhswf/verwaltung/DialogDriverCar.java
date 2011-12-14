@@ -17,159 +17,154 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class DialogDriverCar extends JDialog
-        implements ActionListener {
-    /** Version. */
-    private static final long serialVersionUID = 1L;
+public class DialogDriverCar extends JDialog implements ActionListener {
+	/** Version. */
+	private static final long serialVersionUID = 1L;
 
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	public JComboBox driver;
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	public JComboBox car;
-    
-    private JButton           deleteButton;
-    private JButton           saveButton;
-    private JButton           exitButton;
 
-    private int               row              = -1;
-    private JDialog           dialog;
+	private JButton deleteButton;
+	private JButton saveButton;
+	private JButton exitButton;
 
-    /**
-     * Bastelt die GUI fuers Hauptfenster.
-     */
+	private int row = -1;
+	private JDialog dialog;
+
+	/**
+	 * Bastelt die GUI fuers Hauptfenster.
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public DialogDriverCar(String title, MainWindow parent, TableModelDriverCar model)
-    {
-        super();
-        if (title == null)
-            throw new IllegalArgumentException("Title must not be null!");
+	public DialogDriverCar(String title, MainWindow parent,
+			TableModelDriverCar model) {
+		super();
+		if (title == null)
+			throw new IllegalArgumentException("Title must not be null!");
 
-        setTitle(title);
-	    final int width = 480;
-	    final int height = 420;
-	    dialog = this;
+		setTitle(title);
+		final int width = 480;
+		final int height = 420;
+		dialog = this;
 
-        JFrame.setDefaultLookAndFeelDecorated(true);
+		JFrame.setDefaultLookAndFeelDecorated(true);
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        Container c = getContentPane();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		Container c = getContentPane();
 
-        JPanel vertBox = new JPanel();
-        vertBox.setLayout(new BoxLayout(vertBox, BoxLayout.PAGE_AXIS));
+		JPanel vertBox = new JPanel();
+		vertBox.setLayout(new BoxLayout(vertBox, BoxLayout.PAGE_AXIS));
 
-        JPanel horiBox = new JPanel();
+		JPanel horiBox = new JPanel();
 
-        horiBox = new JPanel();
-        horiBox.setLayout(new BoxLayout(horiBox, BoxLayout.LINE_AXIS));
-        JLabel driverLabel = new JLabel(" Fahrer: ");
-        driverLabel.setPreferredSize(new Dimension(100, 10));
-        horiBox.add(driverLabel);
-  	    driver = new JComboBox();
-  	    for ( Fahrer fahrer : parent.fahrerMap )
-  	      {
-  	    	driver.addItem(fahrer.getFahrer_ID() + "  : " + fahrer.getName());
-  	      }
-  	    driver.setEditable(false);
-  	    driver.setSelectedIndex(0);
-  	    driver.addActionListener(this);
-  	    horiBox.add(driver);
-  	    JLabel carLabel = new JLabel(" Fahrzeug: ");
-  	    carLabel.setPreferredSize(new Dimension(100, 10));
-  	    horiBox.add(carLabel);
-	    car = new JComboBox();
-	    for ( Fahrzeug fahrzeug : parent.fahrzeugMap )
-	      {
-	    	car.addItem(fahrzeug.getFahrzeug_ID() + "  : " + fahrzeug.getKennzeichen());
-	      }
-	    car.setEditable(false);
-	    car.setSelectedIndex(0);
-	    car.addActionListener(this);
-        horiBox.add(car);
-        vertBox.add(horiBox);
+		horiBox = new JPanel();
+		horiBox.setLayout(new BoxLayout(horiBox, BoxLayout.LINE_AXIS));
+		JLabel driverLabel = new JLabel(" Fahrer: ");
+		driverLabel.setPreferredSize(new Dimension(100, 10));
+		horiBox.add(driverLabel);
+		driver = new JComboBox();
+		for (Fahrer fahrer : parent.fahrerMap) {
+			driver.addItem(fahrer.getFahrer_ID() + "  : " + fahrer.getName());
+		}
+		driver.setEditable(false);
+		driver.setSelectedIndex(0);
+		driver.addActionListener(this);
+		horiBox.add(driver);
+		JLabel carLabel = new JLabel(" Fahrzeug: ");
+		carLabel.setPreferredSize(new Dimension(100, 10));
+		horiBox.add(carLabel);
+		car = new JComboBox();
+		for (Fahrzeug fahrzeug : parent.fahrzeugMap) {
+			car.addItem(fahrzeug.getFahrzeug_ID() + "  : "
+					+ fahrzeug.getKennzeichen());
+		}
+		car.setEditable(false);
+		car.setSelectedIndex(0);
+		car.addActionListener(this);
+		horiBox.add(car);
+		vertBox.add(horiBox);
 
-        JTable tableDriverCar = new JTable();
-        tableDriverCar.setModel(parent.tableDataDriverCar);
-//      tableDriver.addMouseListener(new TableClickListener(tableDriver, frame, tableDataFahrer));
-        JScrollPane tableScrollPaneDriverCar = new JScrollPane(tableDriverCar);
-        tableScrollPaneDriverCar
-              .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	    tableScrollPaneDriverCar.setPreferredSize(new Dimension(400, 300));
-	    tableScrollPaneDriverCar.setMaximumSize(new Dimension(440, 300));
-        tableScrollPaneDriverCar.setBorder(BorderFactory
-              .createCompoundBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createTitledBorder("Fahreruebersicht"), BorderFactory
-                          .createEmptyBorder(10, 10, 10, 10)), tableScrollPaneDriverCar
-                    .getBorder()));
-      
-        vertBox.add(tableScrollPaneDriverCar);
-        
-        deleteButton = new JButton("Loeschen");
-        deleteButton.addActionListener(new ActionDriverCar("del", this, parent, model));
-        deleteButton.setEnabled(false);
+		JTable tableDriverCar = new JTable();
+		tableDriverCar.setModel(parent.tableDataDriverCar);
+		// tableDriver.addMouseListener(new TableClickListener(tableDriver,
+		// frame, tableDataFahrer));
+		JScrollPane tableScrollPaneDriverCar = new JScrollPane(tableDriverCar);
+		tableScrollPaneDriverCar
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		tableScrollPaneDriverCar.setPreferredSize(new Dimension(400, 300));
+		tableScrollPaneDriverCar.setMaximumSize(new Dimension(440, 300));
+		tableScrollPaneDriverCar.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createTitledBorder("Fahreruebersicht"),
+						BorderFactory.createEmptyBorder(10, 10, 10, 10)),
+				tableScrollPaneDriverCar.getBorder()));
 
-        saveButton = new JButton("Speichern");
-        saveButton.addActionListener(new ActionDriverCar("add", this, parent, model));
-        saveButton.setEnabled(true);
+		vertBox.add(tableScrollPaneDriverCar);
 
-        exitButton = new JButton("Abbrechen");
-        exitButton.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                dialog.dispose();
-            }
-        });
-        exitButton.setEnabled(true);
+		deleteButton = new JButton("Loeschen");
+		deleteButton.addActionListener(new ActionDriverCar("del", this, parent,
+				model));
+		deleteButton.setEnabled(false);
 
-        JPanel buttonBox = new JPanel();
-        buttonBox.setLayout(new BoxLayout(buttonBox, BoxLayout.LINE_AXIS));
-        buttonBox.add(deleteButton);
-        buttonBox.add(saveButton);
-        buttonBox.add(exitButton);
+		saveButton = new JButton("Speichern");
+		saveButton.addActionListener(new ActionDriverCar("add", this, parent,
+				model));
+		saveButton.setEnabled(true);
 
-        vertBox.add(buttonBox, BorderLayout.SOUTH);
+		exitButton = new JButton("Abbrechen");
+		exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();
+			}
+		});
+		exitButton.setEnabled(true);
 
-        // Noten und Buttons
-        c.add(vertBox, BorderLayout.NORTH);
+		JPanel buttonBox = new JPanel();
+		buttonBox.setLayout(new BoxLayout(buttonBox, BoxLayout.LINE_AXIS));
+		buttonBox.add(deleteButton);
+		buttonBox.add(saveButton);
+		buttonBox.add(exitButton);
 
-        setSize(width, height);
-        setVisible(true);
-    }
+		vertBox.add(buttonBox, BorderLayout.SOUTH);
 
-    public void setDeleteEnabled(boolean state)
-    {
-        deleteButton.setEnabled(state);
-    }
+		// Noten und Buttons
+		c.add(vertBox, BorderLayout.NORTH);
 
-    public void setSaveEnabled(boolean state)
-    {
-        saveButton.setEnabled(state);
-    }
+		setSize(width, height);
+		setVisible(true);
+	}
 
-    public void setExitEnabled(boolean state)
-    {
-        exitButton.setEnabled(state);
-    }
+	public void setDeleteEnabled(boolean state) {
+		deleteButton.setEnabled(state);
+	}
 
-    public void loadFahrzeug(DriverCar driverCar)
-    {
-//        kennzeichen.setText(fahrzeug.getKennzeichen());
-//        erstzulassung.setSelectedDate(fahrzeug.getErstzulassung());
-    }
+	public void setSaveEnabled(boolean state) {
+		saveButton.setEnabled(state);
+	}
 
-    public Integer getRow() {
-        return row;
-    }
+	public void setExitEnabled(boolean state) {
+		exitButton.setEnabled(state);
+	}
 
-    public void setRow(int row) {
-//         System.out.println(row.toString());
-        this.row = row;
-    }
+	public void loadFahrzeug(DriverCar driverCar) {
+		// kennzeichen.setText(fahrzeug.getKennzeichen());
+		// erstzulassung.setSelectedDate(fahrzeug.getErstzulassung());
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
+	public Integer getRow() {
+		return row;
+	}
 
-    }
+	public void setRow(int row) {
+		// System.out.println(row.toString());
+		this.row = row;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
 }
